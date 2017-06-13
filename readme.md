@@ -17,5 +17,5 @@ $ composer require aleswita/dropzoneuploader:1.0
 #### Config
 ```neon
 extensions:
-	webloader: AlesWita\Components\DropzoneUploader\Extension
+	dropzoneuploader: AlesWita\Components\DropzoneUploader\Extension
 ```
