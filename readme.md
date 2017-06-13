@@ -23,7 +23,7 @@ extensions:
 	webloader: AlesWita\Components\DropzoneUploader\Extension
 
 dropzoneuploader:
-	dropzoneTemplate: ::constant(AlesWita\Components\DropzoneUploader\Factory::DROPZONE_BOOTSTRAP_V4_TEMPLATE)
+	dropzoneTemplate: ::constant(AlesWita\Components\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE)
 	uploadDriver:
 		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
 		settings:
