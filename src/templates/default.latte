@@ -1,0 +1,26 @@
+{control form}
+
+<script type="text/javascript">
+ Dropzone.options.dropzoneForm = {
+
+  {foreach $settings as $key => $val}
+   {$key}: {$val},
+  {/foreach}
+
+  {foreach $messages as $key => $val}
+   {$key}: {_$val},
+  {/foreach}
+
+  init: function() {
+   this.on("removedfile", function(file) {
+    $.nette.ajax({
+     type: 'GET',
+     url: {link remove!},
+     data: {
+      {$fileParam}: file.name,
+     },
+    });
+   });
+  },
+ };
+</script>

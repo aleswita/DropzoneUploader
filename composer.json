@@ -1,0 +1,27 @@
+{
+	"name": "aleswita/dropzoneuploader",
+	"description": "Dropzone Uploader for Nette Framework.",
+	"keywords": ["nette", "dropzone", "multiupload"],
+	"license": ["MIT"],
+	"authors": [
+		{
+			"name": "Aleš Wita",
+			"email": "aleswita+github@gmail.com"
+		}
+	],
+	"require": {
+		"php": "~7.1.0",
+		"nette/application": "~2.4.0 || ~3.0.0",
+		"nette/di": "~2.4.0 || ~3.0.0",
+		"latte/latte": "~2.4.0 || ~3.0.0",
+		"dg/ftp-php": "~1.2"
+
+	},
+	"require-dev": {
+		"tracy/tracy": "~2.4.0 || ~3.0.0",
+		"nette/tester": "~1.7.0"
+	},
+	"autoload": {
+		"classmap": ["src/"]
+	}
+}

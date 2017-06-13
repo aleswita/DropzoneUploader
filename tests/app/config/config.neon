@@ -1,0 +1,12 @@
+extensions:
+	dropzoneuploader: AlesWita\Components\DropzoneUploader\Extension
+
+application:
+	mapping:
+		*: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\*Presenter
+
+services:
+	getters.presenter:
+		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\GettersPresenter
+
+	routing.router: AlesWita\Components\DropzoneUploader\Tests\App\Router\Router::createRouter
