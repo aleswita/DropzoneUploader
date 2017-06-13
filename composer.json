@@ -16,7 +16,6 @@
 		"nette/utils": "~2.4.0 || ~3.0.0",
 		"latte/latte": "~2.4.0 || ~3.0.0",
 		"dg/ftp-php": "~1.2"
-
 	},
 	"require-dev": {
 		"nette/robot-loader": "~2.4.0 || ~3.0.0",
