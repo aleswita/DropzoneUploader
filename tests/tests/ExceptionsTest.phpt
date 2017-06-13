@@ -19,14 +19,6 @@ require_once __DIR__ . "/../bootstrap.php";
 require_once __DIR__ . "/../app/presenters/GettersPresenter.php";
 require_once __DIR__ . "/../app/router/Router.php";
 
-require_once __DIR__ . "/../../src/Extension.php";
-require_once __DIR__ . "/../../src/Factory.php";
-require_once __DIR__ . "/../../src/DropzoneUploader.php";
-require_once __DIR__ . "/../../src/Exceptions.php";
-require_once __DIR__ . "/../../src/uploaddriver/IUploadDriver.php";
-require_once __DIR__ . "/../../src/uploaddriver/UploadDriver.php";
-require_once __DIR__ . "/../../src/uploaddriver/Ftp.php";
-
 
 /**
  * @author Ales Wita
