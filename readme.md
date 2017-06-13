@@ -8,7 +8,7 @@ Dropzone Uploader for Nette Framework.
 The best way to install AlesWita/WebLoader is using [Composer](http://getcomposer.org/):
 ```sh
 # For PHP 7.1 and Nette Framework 2.4/3.0
-$ composer require aleswita/dropzoneuploader:1.0
+$ composer require aleswita/dropzoneuploader:dev-master
 ```
 
 
@@ -18,4 +18,57 @@ $ composer require aleswita/dropzoneuploader:1.0
 ```neon
 extensions:
 	webloader: AlesWita\Components\DropzoneUploader\Extension
+
+dropzoneuploader:
+	dropzoneTemplate: ::constant(AlesWita\Components\DropzoneUploader\Factory::DROPZONE_BOOTSTRAP_V4_TEMPLATE)
+	uploadDriver:
+		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
+		settings:
+			url: ftp://user:password@my-ftp.cz
+	settings:
+		maxFilesize: 1mb
+		acceptedFiles:
+			xls: application/vnd.ms-excel
+			xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+		addRemoveLinks: TRUE
+	messages:
+		dictDefaultMessage: "dropzone.dictDefaultMessage"
+```
+
+#### Presenter
+```php
+use AlesWita;
+use Nette\Application;
+
+
+final class DropzonePresenter extends Application\UI\Presenter
+{
+	/** @var AlesWita\Components\DropzoneUploader\Factory @inject */
+	public $dropzoneFactory;
+
+	...
+	...
+
+	/**
+	 * @return AlesWita\Components\DropzoneUploader\DropzoneUploader
+	 */
+	protected function createComponentDropzoneForm(): AlesWita\Components\DropzoneUploader\DropzoneUploader {
+		$form = $this->dropzoneFactory->getDropzoneUploader();
+
+		$form->getUploadDriver()->onUploadBeginning[] = function (AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, Nette\Http\FileUpload $file): void {
+			$uploadDriver->setFolder("test");
+		};
+
+		$form->getUploadDriver()->onRemoveBeginning[] = function (AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, string $file): void {
+			$uploadDriver->setFolder("test");
+		};
+
+		return $form;
+	}
+}
+```
+
+#### Template
+```latte
+{control dropzoneForm}
 ```
