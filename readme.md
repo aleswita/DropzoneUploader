@@ -1,19 +1,18 @@
 # Dropzone Uploader
-Dropzone Uploader for Nette Framework and [Dropzone](http://www.dropzonejs.com).
+Dropzone Uploader for Nette Framework and [DropzoneJs](http://www.dropzonejs.com).
 
 [![Build Status](https://travis-ci.org/aleswita/DropzoneUploader.svg?branch=master)](https://travis-ci.org/aleswita/DropzoneUploader)
 [![Coverage Status](https://coveralls.io/repos/github/aleswita/DropzoneUploader/badge.svg?branch=master)](https://coveralls.io/github/aleswita/DropzoneUploader?branch=master)
 
 #### TODO
-Vytvořeno pro vlastní potřebu, proto je hotov pouze FTP upload driver, pokud bude mít někdo zájem o použití s jinačím typem uploadu, založte issue nebo pošlete pull request.
+Vytvořeno pro vlastní potřebu, proto je hotov pouze FTP upload driver, pokud bude zájem o použití s jiným typem uploadu, založte issue nebo pošlete pull request.
 
 ## Installation
 The best way to install AlesWita/WebLoader is using [Composer](http://getcomposer.org/):
 ```sh
-# For PHP 7.1 and Nette Framework 2.4/3.0 and Dropzone 5.0
+# For PHP 7.1, Nette Framework 2.4/3.0 and DropzoneJs 5.0
 $ composer require aleswita/dropzoneuploader:dev-master
 ```
-
 
 
 ## Usage
@@ -60,11 +59,11 @@ final class DropzonePresenter extends Application\UI\Presenter
 		$form = $this->dropzoneFactory->getDropzoneUploader();
 
 		$form->getUploadDriver()->onUploadBeginning[] = function (AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, Nette\Http\FileUpload $file): void {
-			$uploadDriver->setFolder("test");
+			$uploadDriver->setFolder("foo");
 		};
 
 		$form->getUploadDriver()->onRemoveBeginning[] = function (AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, string $file): void {
-			$uploadDriver->setFolder("test");
+			$uploadDriver->setFolder("foo");
 		};
 
 		return $form;
