@@ -19,11 +19,11 @@ use AlesWita;
 class Factory
 {
 	// default dropzone templates
-	const DROPZONE_DEFAULT_TEMPLATE = __DIR__ . "/templates/default.latte";
-	const DROPZONE_BOOTSTRAP_V4_TEMPLATE = __DIR__ . "/templates/bootstrap_v4.latte";
+	const DEFAULT_TEMPLATE = __DIR__ . "/templates/default.latte";
+	const BOOTSTRAP_V4_TEMPLATE = __DIR__ . "/templates/bootstrap_v4.latte";
 
 	/** @var string */
-	private $dropzoneTemplate = self::DROPZONE_DEFAULT_TEMPLATE;
+	private $dropzoneTemplate = self::DEFAULT_TEMPLATE;
 
 	/** @var AlesWita\Components\DropzoneUploader\UploadDriver\IUploadRiver */
 	private $uploadDriver;
