@@ -104,7 +104,7 @@ class Factory
 	public function getDropzoneUploader(): AlesWita\Components\DropzoneUploader\DropzoneUploader {
 		$dropzoneUploader = new DropzoneUploader;
 
-        $dropzoneUploader->setDropzoneTemplate($this->dropzoneTemplate)
+		$dropzoneUploader->setDropzoneTemplate($this->dropzoneTemplate)
 			->setUploadDriver($this->uploadDriver)
 			->setSettings($this->settings)
 			->setMessages($this->messages);

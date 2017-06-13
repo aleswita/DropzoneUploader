@@ -51,7 +51,7 @@ final class Ftp extends UploadDriver
 				if ($ftp->nlist($this->folder) === FALSE) {
 					$ftp->mkdir($this->folder);
 				}
-	                                                                                                    // getSanitizedName
+
 				$fileName = ($this->folder === NULL ? $file->getSanitizedName() : "{$this->folder}/{$file->getName()}");
 				return $ftp->put($fileName, $file->getTemporaryFile(), FTP_BINARY);
 			} catch (\FtpException $e) {

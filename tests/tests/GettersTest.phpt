@@ -55,13 +55,13 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 		Tester\Assert::same(__DIR__ . "/../files/template.latte", $presenter->dropzoneUploader->getDropzoneTemplate());
-        Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($presenter->dropzoneUploader->getUploadDriver())));
-        Tester\Assert::same(1048576, $presenter->dropzoneUploader->getSettings()["maxFilesize"]);
-        Tester\Assert::same(["foo"], $presenter->dropzoneUploader->getSettings()["acceptedFiles"]);
-        Tester\Assert::same("foo", $presenter->dropzoneUploader->getMessages()["dictDefaultMessage"]);
-        Tester\Assert::false(isset($presenter->dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]));
+		Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($presenter->dropzoneUploader->getUploadDriver())));
+		Tester\Assert::same(1048576, $presenter->dropzoneUploader->getSettings()["maxFilesize"]);
+		Tester\Assert::same(["foo"], $presenter->dropzoneUploader->getSettings()["acceptedFiles"]);
+		Tester\Assert::same("foo", $presenter->dropzoneUploader->getMessages()["dictDefaultMessage"]);
+		Tester\Assert::false(isset($presenter->dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]));
 
-        Tester\Assert::true($presenter->dropzoneUploader->getDropzoneUploader() instanceof AlesWita\Components\DropzoneUploader\DropzoneUploader);
+		Tester\Assert::true($presenter->dropzoneUploader->getDropzoneUploader() instanceof AlesWita\Components\DropzoneUploader\DropzoneUploader);
 	}
 
 	/**
@@ -85,20 +85,20 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 		Tester\Assert::same(AlesWita\Components\DropzoneUploader\Factory::DROPZONE_BOOTSTRAP_V4_TEMPLATE, $presenter->dropzoneUploader->getDropzoneTemplate());
-        Tester\Assert::same("foo", $presenter->dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]);
+		Tester\Assert::same("foo", $presenter->dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]);
 
 		// check Ftp driver
 		$uploadDriver = $presenter->dropzoneUploader->getUploadDriver();
 
-        Tester\Assert::true(array_key_exists("AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver", class_implements($uploadDriver)));
-        Tester\Assert::same(["url" => "foo"], $uploadDriver->getSettings());
-        Tester\Assert::same(NULL, $uploadDriver->getFolder());
+		Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($uploadDriver)));
+		Tester\Assert::same(["url" => "foo"], $uploadDriver->getSettings());
+		Tester\Assert::same(NULL, $uploadDriver->getFolder());
 
 		$uploadDriver->setSettings(["url" => "test"])
 			->setFolder("foo");
 
-        Tester\Assert::same(["url" => "test"], $uploadDriver->getSettings());
-        Tester\Assert::same("foo", $uploadDriver->getFolder());
+		Tester\Assert::same(["url" => "test"], $uploadDriver->getSettings());
+		Tester\Assert::same("foo", $uploadDriver->getFolder());
 	}
 }
 

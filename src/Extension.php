@@ -26,7 +26,7 @@ class Extension extends Nette\DI\CompilerExtension
 			"settings" => [],
 		],
 		"settings" => [
-        	"method" => "POST",
+			"method" => "POST",
 			"parallelUploads" => 1,
 			"uploadMultiple" => FALSE,
 			"maxFilesize" => NULL,
@@ -82,8 +82,8 @@ class Extension extends Nette\DI\CompilerExtension
 		} else {
 			$uploadDriver = new $config["uploadDriver"]["driver"];
 
-			if (!array_key_exists("AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver", class_implements($uploadDriver))) {
-				throw new DropzoneUploaderException("Upload driver must implements AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver interface!");
+			if (!array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($uploadDriver))) {
+				throw new DropzoneUploaderException("Upload driver must implements AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver interface!");
 			} else {
 				if (!is_array($config["uploadDriver"]["settings"])) {
 					throw new DropzoneUploaderException("Upload driver settings must be array!");
