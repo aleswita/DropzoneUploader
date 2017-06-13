@@ -145,7 +145,7 @@ class Extension extends Nette\DI\CompilerExtension
 			case "mb":
 				return $num * pow(1024, 2);
 			case "gb":
-				 return $num * pow(1024, 3);
+				return $num * pow(1024, 3);
 			case "tb":
 				return $num * pow(1024, 4);
 			case "pb":
