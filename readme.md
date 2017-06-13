@@ -1,15 +1,19 @@
 # Dropzone Uploader
-Dropzone Uploader for Nette Framework.
+Dropzone Uploader for Nette Framework and [Dropzone](http://www.dropzonejs.com).
 
 [![Build Status](https://travis-ci.org/aleswita/DropzoneUploader.svg?branch=master)](https://travis-ci.org/aleswita/DropzoneUploader)
 [![Coverage Status](https://coveralls.io/repos/github/aleswita/DropzoneUploader/badge.svg?branch=master)](https://coveralls.io/github/aleswita/DropzoneUploader?branch=master)
 
+#### TODO
+Vytvořeno pro vlastní potřebu, proto je hotov pouze FTP upload driver, pokud bude mít někdo zájem o použití s jinačím typem uploadu, založte issue nebo pošlete pull request.
+
 ## Installation
 The best way to install AlesWita/WebLoader is using [Composer](http://getcomposer.org/):
 ```sh
-# For PHP 7.1 and Nette Framework 2.4/3.0
+# For PHP 7.1 and Nette Framework 2.4/3.0 and Dropzone 5.0
 $ composer require aleswita/dropzoneuploader:dev-master
 ```
+
 
 
 ## Usage
