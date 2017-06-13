@@ -24,8 +24,27 @@ final class Ftp extends UploadDriver
 		"url" => NULL,
 	];
 
+	/** @var string */
+	private $folder;
+
 	/** @var Ftp */
 	private $ftpConnection;
+
+	/**
+	 * @param string
+	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 */
+	public function setFolder(string $folder): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
+		$this->folder = Nette\Utils\Strings::trim($folder, "\\/");
+		return $this;
+	}
+
+	/**
+	 * @return string|NULL
+	 */
+	public function getFolder(): ?string {
+		return $this->folder;
+	}
 
 	/**
 	 * @return Ftp

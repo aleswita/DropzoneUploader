@@ -28,9 +28,6 @@ abstract class UploadDriver implements IUploadDriver
 	/** @var array */
 	protected $settings = [];
 
-	/** @var string */
-	protected $folder;
-
 	/**
 	 * @param array
 	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
@@ -41,26 +38,10 @@ abstract class UploadDriver implements IUploadDriver
 	}
 
 	/**
-	 * @param string
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
-	 */
-	public function setFolder(string $folder): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
-		$this->folder = Nette\Utils\Strings::trim($folder, "\\/");
-		return $this;
-	}
-
-	/**
 	 * @return array
 	 */
 	public function getSettings(): array {
 		return $this->settings;
-	}
-
-	/**
-	 * @return string|NULL
-	 */
-	public function getFolder(): ?string {
-		return $this->folder;
 	}
 
 	/**

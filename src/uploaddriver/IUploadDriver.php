@@ -25,19 +25,9 @@ interface IUploadDriver
 	function setSettings(array $settings): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver;
 
 	/**
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
-	 */
-	function setFolder(string $folder): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver;
-
-	/**
 	 * @return array
 	 */
 	function getSettings(): array;
-
-	/**
-	 * @return string|NULL
-	 */
-	function getFolder(): ?string;
 
 	/**
 	 * @param Nette\Http\FileUpload
