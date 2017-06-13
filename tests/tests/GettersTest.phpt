@@ -19,14 +19,6 @@ require_once __DIR__ . "/../bootstrap.php";
 require_once __DIR__ . "/../app/presenters/GettersPresenter.php";
 require_once __DIR__ . "/../app/router/Router.php";
 
-require_once __DIR__ . "/../../src/Extension.php";
-require_once __DIR__ . "/../../src/Factory.php";
-require_once __DIR__ . "/../../src/DropzoneUploader.php";
-require_once __DIR__ . "/../../src/Exceptions.php";
-require_once __DIR__ . "/../../src/uploaddriver/IUploadDriver.php";
-require_once __DIR__ . "/../../src/uploaddriver/UploadDriver.php";
-require_once __DIR__ . "/../../src/uploaddriver/Ftp.php";
-
 
 /**
  * @author Ales Wita
@@ -84,7 +76,7 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
-		Tester\Assert::same(AlesWita\Components\DropzoneUploader\Factory::DROPZONE_BOOTSTRAP_V4_TEMPLATE, $presenter->dropzoneUploader->getDropzoneTemplate());
+		Tester\Assert::same(AlesWita\Components\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE, $presenter->dropzoneUploader->getDropzoneTemplate());
 		Tester\Assert::same("foo", $presenter->dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]);
 
 		// check Ftp driver
