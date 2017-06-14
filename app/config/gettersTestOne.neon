@@ -1,9 +1,0 @@
-dropzoneuploader:
-	dropzoneTemplate: %appDir%/../files/template.latte
-	uploadDriver:
-		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
-	settings:
-		maxFilesize: 1MB
-		acceptedFiles: foo
-	messages:
-		dictDefaultMessage: foo
