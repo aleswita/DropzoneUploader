@@ -1,0 +1,4 @@
+dropzoneuploader:
+	uploadDriver:
+		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
+		settings: foo
