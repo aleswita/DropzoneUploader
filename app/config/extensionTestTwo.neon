@@ -1,5 +1,0 @@
-dropzoneuploader:
-	uploadDriver:
-		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
-	settings:
-		maxFilesize: 100 kb
