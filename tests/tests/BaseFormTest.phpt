@@ -49,29 +49,29 @@ final class BaseFormTest extends Tester\TestCase
 		$dom = Tester\DomQuery::fromHtml($source);
 
 
-		// form
+		// form tag
 		$data = $dom->find("form");
 
-        Tester\Assert::count(1, $data);
+		Tester\Assert::count(1, $data);
 		Tester\Assert::same("/base-form/one", (string) $data[0]["action"]);
 		Tester\Assert::same("post", (string) $data[0]["method"]);
 		Tester\Assert::same("dropzone", (string) $data[0]["class"]);
 		Tester\Assert::same("dropzoneForm", (string) $data[0]["id"]);
 
 
-		// input
+		// input tag
 		$data = $dom->find("input");
 
-        Tester\Assert::count(1, $data);
+		Tester\Assert::count(1, $data);
 		Tester\Assert::same("hidden", (string) $data[0]["type"]);
 		Tester\Assert::same("_do", (string) $data[0]["name"]);
 		Tester\Assert::same("dropzoneUploader-form-submit", (string) $data[0]["value"]);
 
 
-		// java script
+		// script tag
 		$data = $dom->find("script");
 
-        Tester\Assert::count(1, $data);
+		Tester\Assert::count(1, $data);
 		Tester\Assert::same("text/javascript", (string) $data[0]["type"]);
 	}
 }
