@@ -36,10 +36,10 @@ final class BaseFormTest extends Tester\TestCase
 		$container = $configurator->createContainer();
 		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
 
-		$presenter = $presenterFactory->createPresenter("BaseForm");
+		$presenter = $presenterFactory->createPresenter("Base");
 		$presenter->getTemplate()->setTranslator(new AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
-		$request = new Nette\Application\Request("BaseForm", "GET", ["action" => "one"]);
+		$request = new Nette\Application\Request("Base", "GET", ["action" => "one"]);
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
@@ -53,7 +53,7 @@ final class BaseFormTest extends Tester\TestCase
 		$data = $dom->find("form");
 
 		Tester\Assert::count(1, $data);
-		Tester\Assert::same("/base-form/one", (string) $data[0]["action"]);
+		Tester\Assert::same("/base/one", (string) $data[0]["action"]);
 		Tester\Assert::same("post", (string) $data[0]["method"]);
 		Tester\Assert::same("dropzone", (string) $data[0]["class"]);
 		Tester\Assert::same("dropzoneForm", (string) $data[0]["id"]);

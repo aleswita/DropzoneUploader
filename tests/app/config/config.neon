@@ -9,10 +9,7 @@ services:
 	fake.translator:
 		class: AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator
 
-	getters.presenter:
-		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\GettersPresenter
-
-	baseForm.presenter:
-		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\BaseFormPresenter
+	base.presenter:
+		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\BasePresenter
 
 	routing.router: AlesWita\Components\DropzoneUploader\Tests\App\Router\Router::createRouter

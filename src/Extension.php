@@ -143,7 +143,7 @@ class Extension extends Nette\DI\CompilerExtension
 	}
 
 	/**
-	 * @param string|integer
+	 * @param string|int
 	 * @return int|float|NULL
 	 */
 	private function convertToBytes($from)

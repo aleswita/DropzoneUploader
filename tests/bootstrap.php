@@ -12,8 +12,7 @@ if (@!include __DIR__ . "/../vendor/autoload.php") {
 	exit(1);
 }
 
-require_once __DIR__ . "/app/presenters/BaseFormPresenter.php";
-require_once __DIR__ . "/app/presenters/GettersPresenter.php";
+require_once __DIR__ . "/app/presenters/BasePresenter.php";
 require_once __DIR__ . "/app/router/Router.php";
 require_once __DIR__ . "/app/service/FakeTranslator.php";
 

@@ -34,30 +34,22 @@ final class GettersTest extends Tester\TestCase
 		$configurator->addConfig(__DIR__ . "/../app/config/gettersTestOne.neon");
 
 		$container = $configurator->createContainer();
-		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
 
-		$presenter = $presenterFactory->createPresenter("Getters");
-		$presenter->autoCanonicalize = FALSE;
-		$request = new Nette\Application\Request("Getters", "GET", ["action" => "one"]);
-		$response = $presenter->run($request);
 
-		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+		// check service
+		$service = $container->getService("dropzoneuploader.dropzoneuploader");
 
-		// check factory
-		$factory = $presenter->dropzoneUploader;
-
-		Tester\Assert::true($factory->getTranslator() instanceof Nette\Localization\ITranslator);
-		Tester\Assert::same(__DIR__ . "/../files/template.latte", $factory->getDropzoneTemplate());
-		Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($factory->getUploadDriver())));
-		Tester\Assert::same(1048576, $factory->getSettings()["maxFilesize"]);
-		Tester\Assert::same(["foo"], $factory->getSettings()["acceptedFiles"]);
-		Tester\Assert::same("foo", $factory->getMessages()["dictDefaultMessage"]);
-		Tester\Assert::false(isset($factory->getMessages()["dictRemoveFileConfirmation"]));
+		Tester\Assert::true($service->getTranslator() instanceof Nette\Localization\ITranslator);
+		Tester\Assert::same(__DIR__ . "/../files/template.latte", $service->getDropzoneTemplate());
+		Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($service->getUploadDriver())));
+		Tester\Assert::same(1048576, $service->getSettings()["maxFilesize"]);
+		Tester\Assert::same(["foo"], $service->getSettings()["acceptedFiles"]);
+		Tester\Assert::same("foo", $service->getMessages()["dictDefaultMessage"]);
+		Tester\Assert::false(isset($service->getMessages()["dictRemoveFileConfirmation"]));
 
 
 		// check component
-		$component = $factory->getDropzoneUploader();
+		$component = $service->getDropzoneUploader();
 
 		Tester\Assert::true($component instanceof AlesWita\Components\DropzoneUploader\DropzoneUploader);
 		Tester\Assert::true($component->getTranslator() instanceof Nette\Localization\ITranslator);
@@ -79,26 +71,17 @@ final class GettersTest extends Tester\TestCase
 		$configurator->addConfig(__DIR__ . "/../app/config/gettersTestTwo.neon");
 
 		$container = $configurator->createContainer();
-		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
-
-		$presenter = $presenterFactory->createPresenter("Getters");
-		$presenter->autoCanonicalize = FALSE;
-		$request = new Nette\Application\Request("Getters", "GET", ["action" => "one"]);
-		$response = $presenter->run($request);
-
-		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 
 		// check factory
-		$factory = $presenter->dropzoneUploader;
+		$service = $container->getService("dropzoneuploader.dropzoneuploader");
 
-		Tester\Assert::same(AlesWita\Components\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE, $factory->getDropzoneTemplate());
-		Tester\Assert::same("foo", $factory->getMessages()["dictRemoveFileConfirmation"]);
+		Tester\Assert::same(AlesWita\Components\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE, $service->getDropzoneTemplate());
+		Tester\Assert::same("foo", $service->getMessages()["dictRemoveFileConfirmation"]);
 
 
 		// check driver
-		$driver = $factory->getUploadDriver();
+		$driver = $service->getUploadDriver();
 
 		Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($driver)));
 		Tester\Assert::same(["url" => "foo"], $driver->getSettings());
