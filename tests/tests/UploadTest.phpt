@@ -43,23 +43,26 @@ final class UploadTest extends Tester\TestCase
 		$request = new Nette\Application\Request("Base", "POST", ["action" => "two"], ["_do" => "dropzoneUploader-form-submit"], ["file" => $file]);
 		$response = $presenter->run($request);
 
-
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 
-		// form check
+		// check service
 		$service = $presenter["dropzoneUploader"];
-		$form = $presenter["dropzoneUploader"]["form"];
 
-		Tester\Assert::count(0, $form->getErrors());
-		Tester\Assert::true($form->isSuccess());
-		Tester\Assert::same($file, $presenter["dropzoneUploader"]["form"]->getHttpData()["file"]);
 		Tester\Assert::same("upload", $service->getUploadDriver()->getSettings()["dir"]);
 		Tester\Assert::same("foo", $service->getUploadDriver()->getFolder());
 
 
-		// file check
+		// check form
+		$form = $presenter["dropzoneUploader"]["form"];
+
+		Tester\Assert::count(0, $form->getErrors());
+		Tester\Assert::true($form->isSuccess());
+		Tester\Assert::same($file, $form->getHttpData()["file"]);
+
+
+		// check file
 		Tester\Assert::true(is_file("{$service->getUploadDriver()->getSettings()["dir"]}/{$service->getUploadDriver()->getFolder()}/template.latte"));
 	}
 
@@ -85,14 +88,13 @@ final class UploadTest extends Tester\TestCase
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 
-		// form check
+		// check service
 		$service = $presenter["dropzoneUploader"];
-		$form = $presenter["dropzoneUploader"]["form"];
 
 		Tester\Assert::same("foo", $service->getUploadDriver()->getFolder());
 
 
-		// file check
+		// check file
 		Tester\Assert::true(!is_file("{$service->getUploadDriver()->getSettings()["dir"]}/{$service->getUploadDriver()->getFolder()}/template.latte"));
 	}
 }
