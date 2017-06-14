@@ -102,8 +102,8 @@ class Extension extends Nette\DI\CompilerExtension
 
 		// settings
 		if ($config["settings"]["maxFilesize"] !== NULL) {
-			if (!is_string($config["settings"]["maxFilesize"])) {
-				throw new DropzoneUploaderException("Maximum file size settings must be string!");
+			if (!is_string($config["settings"]["maxFilesize"]) && !is_integer($config["settings"]["maxFilesize"]) && !is_float($config["settings"]["maxFilesize"])) {
+				throw new DropzoneUploaderException("Maximum file size settings must be integer, float or string!");
 			}
 			$config["settings"]["maxFilesize"] = $this->convertToBytes($config["settings"]["maxFilesize"]);
 
@@ -143,15 +143,22 @@ class Extension extends Nette\DI\CompilerExtension
 	}
 
 	/**
-	 * @param string
-	 * @return int|NULL
+	 * @param string|integer
+	 * @return int|float|NULL
 	 */
-	private function convertToBytes(string $from): ?int {
+	private function convertToBytes($from)
+	{
 		if (Nette\Utils\Validators::isNumericInt($from)) {
 			return (int) $from;
 		} else {
-			$num = (int) Nette\Utils\Strings::substring($from, 0, -2);
+			$num = Nette\Utils\Strings::trim(Nette\Utils\Strings::substring($from, 0, -2));
 			$unit = Nette\Utils\Strings::lower(Nette\Utils\Strings::substring($from, -2));
+
+			if (Nette\Utils\Validators::isNumericInt($num)) {
+				$num = (int) $num;
+			} else {
+				$num = (float) $num;
+			}
 
 			switch ($unit) {
 				case "kb":
@@ -162,8 +169,6 @@ class Extension extends Nette\DI\CompilerExtension
 					return $num * pow(1024, 3);
 				case "tb":
 					return $num * pow(1024, 4);
-				case "pb":
-					return $num * pow(1024, 5);
 				default:
 					return NULL;
 			}

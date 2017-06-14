@@ -116,7 +116,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be string!
+	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be integer, float or string!
 	 * @return void
 	 */
 	public function testEight(): void {

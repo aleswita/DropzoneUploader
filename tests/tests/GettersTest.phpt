@@ -52,7 +52,16 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::same("foo", $presenter->dropzoneUploader->getMessages()["dictDefaultMessage"]);
 		Tester\Assert::false(isset($presenter->dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]));
 
-		Tester\Assert::true($presenter->dropzoneUploader->getDropzoneUploader() instanceof AlesWita\Components\DropzoneUploader\DropzoneUploader);
+
+		$dropzoneUploader = $presenter->dropzoneUploader->getDropzoneUploader();
+
+		Tester\Assert::true($dropzoneUploader instanceof AlesWita\Components\DropzoneUploader\DropzoneUploader);
+		Tester\Assert::true($dropzoneUploader->getTranslator() instanceof Nette\Localization\ITranslator);
+		Tester\Assert::same(__DIR__ . "/../files/template.latte", $dropzoneUploader->getDropzoneTemplate());
+		Tester\Assert::same(1, $dropzoneUploader->getSettings()["maxFilesize"]);
+		Tester\Assert::same("foo", $dropzoneUploader->getSettings()["acceptedFiles"]);
+		Tester\Assert::same("foo", $dropzoneUploader->getMessages()["dictDefaultMessage"]);
+		Tester\Assert::false(isset($dropzoneUploader->getMessages()["dictRemoveFileConfirmation"]));
 	}
 
 	/**

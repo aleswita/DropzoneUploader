@@ -87,6 +87,13 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	}
 
 	/**
+	 * @return Nette\Localization\ITranslator
+	 */
+	public function getTranslator(): Nette\Localization\ITranslator {
+		return $this->translator;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getDropzoneTemplate(): string {
@@ -98,6 +105,13 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	 */
 	public function getUploadDriver(): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
 		return $this->uploadDriver;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getSettings(): array {
+		return $this->settings;
 	}
 
 	/**
