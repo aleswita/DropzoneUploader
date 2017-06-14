@@ -8,7 +8,7 @@
   {/foreach}
 
   {foreach $messages as $key => $val}
-   {$key}: {_$val},
+   {$key}: {$val|translate},
   {/foreach}
 
   init: function() {

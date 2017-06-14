@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace AlesWita\Components\DropzoneUploader;
 
 use AlesWita;
+use Nette;
 
 
 /**
@@ -22,6 +23,9 @@ class Factory
 	const DEFAULT_TEMPLATE = __DIR__ . "/templates/default.latte";
 	const BOOTSTRAP_V4_TEMPLATE = __DIR__ . "/templates/bootstrap_v4.latte";
 
+	/** @var Nette\Localization\ITranslator */
+	private $translator;
+
 	/** @var string */
 	private $dropzoneTemplate = self::DEFAULT_TEMPLATE;
 
@@ -33,6 +37,15 @@ class Factory
 
 	/** @var array */
 	private $messages = [];
+
+	/**
+	 * @param Nette\Localization\ITranslator
+	 * @return self
+	 */
+	public function setTranslator(Nette\Localization\ITranslator $translator): self {
+		$this->translator = $translator;
+		return $this;
+	}
 
 	/**
 	 * @param string
@@ -71,6 +84,13 @@ class Factory
 	}
 
 	/**
+	 * @return Nette\Localization\ITranslator
+	 */
+	public function getTranslator(): Nette\Localization\ITranslator {
+		return $this->translator;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getDropzoneTemplate(): string {
@@ -104,7 +124,8 @@ class Factory
 	public function getDropzoneUploader(): AlesWita\Components\DropzoneUploader\DropzoneUploader {
 		$dropzoneUploader = new DropzoneUploader;
 
-		$dropzoneUploader->setDropzoneTemplate($this->dropzoneTemplate)
+		$dropzoneUploader->setTranslator($this->translator)
+			->setDropzoneTemplate($this->dropzoneTemplate)
 			->setUploadDriver($this->uploadDriver)
 			->setSettings($this->settings)
 			->setMessages($this->messages);

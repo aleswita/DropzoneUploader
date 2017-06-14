@@ -16,8 +16,6 @@ use Nette;
 use Tester;
 
 require_once __DIR__ . "/../bootstrap.php";
-require_once __DIR__ . "/../app/presenters/GettersPresenter.php";
-require_once __DIR__ . "/../app/router/Router.php";
 
 
 /**
@@ -46,6 +44,7 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
+		Tester\Assert::true($presenter->dropzoneUploader->getTranslator() instanceof Nette\Localization\ITranslator);
 		Tester\Assert::same(__DIR__ . "/../files/template.latte", $presenter->dropzoneUploader->getDropzoneTemplate());
 		Tester\Assert::true(array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($presenter->dropzoneUploader->getUploadDriver())));
 		Tester\Assert::same(1048576, $presenter->dropzoneUploader->getSettings()["maxFilesize"]);

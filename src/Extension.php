@@ -132,26 +132,41 @@ class Extension extends Nette\DI\CompilerExtension
 	}
 
 	/**
+	 * @return void
+	 */
+	public function beforeCompile(): void {
+		$config = $this->getConfig($this->defaults);
+		$container = $this->getContainerBuilder();
+
+		$dropzoneUploader = $container->getDefinitionByType("AlesWita\\Components\\DropzoneUploader\\Factory");
+		$dropzoneUploader->addSetup("\$service->setTranslator(?)", ["@" . $container->getByType("Nette\\Localization\\ITranslator")]);
+	}
+
+	/**
 	 * @param string
 	 * @return int|NULL
 	 */
 	private function convertToBytes(string $from): ?int {
-		$num = (int) Nette\Utils\Strings::substring($from, 0, -2);
-		$unit = Nette\Utils\Strings::lower(Nette\Utils\Strings::substring($from, -2));
+		if (Nette\Utils\Validators::isNumericInt($from)) {
+			return (int) $from;
+		} else {
+			$num = (int) Nette\Utils\Strings::substring($from, 0, -2);
+			$unit = Nette\Utils\Strings::lower(Nette\Utils\Strings::substring($from, -2));
 
-		switch ($unit) {
-			case "kb":
-				return $num * 1024;
-			case "mb":
-				return $num * pow(1024, 2);
-			case "gb":
-				return $num * pow(1024, 3);
-			case "tb":
-				return $num * pow(1024, 4);
-			case "pb":
-				return $num * pow(1024, 5);
-			default:
-				return NULL;
+			switch ($unit) {
+				case "kb":
+					return $num * 1024;
+				case "mb":
+					return $num * pow(1024, 2);
+				case "gb":
+					return $num * pow(1024, 3);
+				case "tb":
+					return $num * pow(1024, 4);
+				case "pb":
+					return $num * pow(1024, 5);
+				default:
+					return NULL;
+			}
 		}
 	}
 }

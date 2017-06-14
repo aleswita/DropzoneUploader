@@ -20,6 +20,9 @@ use Nette\Application;
  */
 class DropzoneUploader extends Application\UI\Control
 {
+	/** @var Nette\Localization\ITranslator */
+	private $translator;
+
 	/** @var string */
 	private $dropzoneTemplate;
 
@@ -31,6 +34,15 @@ class DropzoneUploader extends Application\UI\Control
 
 	/** @var array */
 	private $messages;
+
+	/**
+	 * @param Nette\Localization\ITranslator
+	 * @return self
+	 */
+	public function setTranslator(Nette\Localization\ITranslator $translator): self {
+		$this->translator = $translator;
+		return $this;
+	}
 
 	/**
 	 * @param string
@@ -105,6 +117,7 @@ class DropzoneUploader extends Application\UI\Control
 		$this->template->messages = $this->messages;
 
 		$this->template->setFile($this->dropzoneTemplate);
+		$this->template->setTranslator($this->translator);
 		$this->template->render();
 	}
 

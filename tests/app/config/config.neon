@@ -6,7 +6,13 @@ application:
 		*: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\*Presenter
 
 services:
+	fake.translator:
+		class: AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator
+
 	getters.presenter:
 		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\GettersPresenter
+
+	baseForm.presenter:
+		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\BaseFormPresenter
 
 	routing.router: AlesWita\Components\DropzoneUploader\Tests\App\Router\Router::createRouter
