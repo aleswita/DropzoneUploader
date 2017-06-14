@@ -11,14 +11,13 @@ namespace AlesWita\Components\DropzoneUploader;
 
 use AlesWita;
 use Nette;
-use Nette\Application;
 
 
 /**
  * @author Ales Wita
  * @license MIT
  */
-class DropzoneUploader extends Application\UI\Control
+class DropzoneUploader extends Nette\Application\UI\Control
 {
 	/** @var Nette\Localization\ITranslator */
 	private $translator;
@@ -127,13 +126,12 @@ class DropzoneUploader extends Application\UI\Control
 	 * @return Nette\Application\UI\Form
 	 */
 	protected function createComponentForm(): Nette\Application\UI\Form {
-		$form = new Application\UI\Form;
+		$form = new Nette\Application\UI\Form;
 
-		$form->getElementPrototype()
-			->setClass("dropzone")
+		$form->getElementPrototype()->setClass("dropzone")
 			->setId("dropzoneForm");
 
-		$form->onSuccess[] = function (Application\UI\Form $form, array $values): void {
+		$form->onSuccess[] = function (Nette\Application\UI\Form $form, array $values): void {
 			$httpData = $form->getHttpData();
 			$this->uploadDriver->upload($httpData["file"]);
 		};
