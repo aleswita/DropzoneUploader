@@ -31,8 +31,8 @@ dropzoneuploader:
 	settings:
 		maxFilesize: 1mb
 		acceptedFiles:
-			xls: application/vnd.ms-excel
-			xlsx: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+			- application/vnd.ms-excel
+			- application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 		addRemoveLinks: TRUE
 	messages:
 		dictDefaultMessage: "dropzone.dictDefaultMessage"
@@ -41,10 +41,9 @@ dropzoneuploader:
 #### Presenter
 ```php
 use AlesWita;
-use Nette\Application;
 
 
-final class DropzonePresenter extends Application\UI\Presenter
+final class DropzonePresenter extends Nette\Application\UI\Presenter
 {
 	/** @var AlesWita\Components\DropzoneUploader\Factory @inject */
 	public $dropzoneFactory;
