@@ -29,7 +29,7 @@ final class Move extends UploadDriver
 	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
 	public function setSettings(array $settings): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
-		$settings["dir"] = Nette\Utils\Strings::trim($settings["dir"], "\\/");
+		$settings["dir"] = (isset($settings["dir"]) ? Nette\Utils\Strings::trim($settings["dir"], "\\/") : NULL);
 		parent::setSettings($settings);
 		return $this;
 	}

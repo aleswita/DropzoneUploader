@@ -1,3 +1,3 @@
 dropzoneuploader:
 	uploadDriver:
-		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
+		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Move
