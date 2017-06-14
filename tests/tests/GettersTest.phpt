@@ -73,7 +73,7 @@ final class GettersTest extends Tester\TestCase
 		$container = $configurator->createContainer();
 
 
-		// check service
+		// check factory
 		$service = $container->getService("dropzoneuploader.dropzoneuploader");
 
 		Tester\Assert::same(AlesWita\Components\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE, $service->getDropzoneTemplate());
