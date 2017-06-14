@@ -13,7 +13,7 @@
 
   init: function() {
    this.on("removedfile", function(file) {
-    $.nette.ajax({
+    $.ajax({
      type: 'GET',
      url: {link remove!},
      data: {
