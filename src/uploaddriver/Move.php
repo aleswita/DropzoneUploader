@@ -63,7 +63,7 @@ final class Move extends UploadDriver
 		if ($parent === TRUE) {
 			try {
 				$path = ($this->folder === NULL ? "{$this->settings["dir"]}/{$file}" : "{$this->settings["dir"]}/{$this->folder}/{$file}");
-        		Nette\Utils\FileSystem::delete($path);
+				Nette\Utils\FileSystem::delete($path);
 				return TRUE;
 			} catch (Nette\IOException $e) {
 			}
