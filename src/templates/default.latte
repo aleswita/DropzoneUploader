@@ -13,13 +13,15 @@
 
   init: function() {
    this.on("removedfile", function(file) {
-    $.ajax({
-     type: 'GET',
-     url: {link remove!},
-     data: {
-      {$fileParam}: file.name,
-     },
-    });
+    if (file.accepted) {
+     $.ajax({
+      type: "GET",
+      url: {link remove!},
+      data: {
+       {$fileParam}: file.name,
+      },
+     });
+    }
    });
   },
  };
