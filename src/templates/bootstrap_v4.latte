@@ -1,41 +1,33 @@
 <div class="container">
 
  <div class="row">
-  <div class="col-12">
-
-   <div class="jumbotron">
-    <h1 class="display-4 text-center">
+  <div class="col-8 offset-2">
+   <div class="card card-outline-primary mb-3 text-center">
+    <div class="card-footer lead text-center">
      {control form}
-    </h1>
+    </div>
    </div>
-
   </div>
  </div>
 
- <div class="row">
-  <div class="col-12">
+ <div id="previews">
+  <div id="template" class="row alert">
 
-   <div id="previews">
-    <div id="template" class="row alert">
+   {* file name *}
+   <div class="col-4 text-truncate" data-dz-name></div>
 
-     {* file name *}
-     <div class="col-4 text-truncate" data-dz-name></div>
+   {* file size *}
+   <div class="col-1" data-dz-size></div>
 
-     {* file size *}
-     <div class="col-1" data-dz-size></div>
-
-     {* progress *}
-     <div class="col-2">
-      <div class="progress">
-       <div class="progress-bar" style="width: 0%" data-dz-uploadprogress></div>
-      </div>
-     </div>
-
-     {* file error *}
-     <div class="col-3 text-truncate" data-dz-errormessage></div>
-
+   {* progress *}
+   <div class="col-2">
+    <div class="progress">
+     <div class="progress-bar" style="width: 0%" data-dz-uploadprogress></div>
     </div>
    </div>
+
+   {* file error *}
+   <div class="col-3 text-truncate" data-dz-errormessage></div>
 
   </div>
  </div>
