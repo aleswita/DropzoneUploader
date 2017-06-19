@@ -1,7 +1,7 @@
 dropzoneuploader:
 	dropzoneTemplate: %appDir%/../files/template.latte
 	uploadDriver:
-		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Move
+		driver: AlesWita\DropzoneUploader\UploadDriver\Move
 	settings:
 		maxFilesize: 1MB
 		acceptedFiles: foo

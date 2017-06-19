@@ -1,15 +1,15 @@
 extensions:
-	dropzoneuploader: AlesWita\Components\DropzoneUploader\Extension
+	dropzoneuploader: AlesWita\DropzoneUploader\Extension
 
 application:
 	mapping:
-		*: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\*Presenter
+		*: AlesWita\DropzoneUploader\Tests\App\Presenters\*Presenter
 
 services:
 	fake.translator:
-		class: AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator
+		class: AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator
 
 	base.presenter:
-		class: AlesWita\Components\DropzoneUploader\Tests\App\Presenters\BasePresenter
+		class: AlesWita\DropzoneUploader\Tests\App\Presenters\BasePresenter
 
-	routing.router: AlesWita\Components\DropzoneUploader\Tests\App\Router\Router::createRouter
+	routing.router: AlesWita\DropzoneUploader\Tests\App\Router\Router::createRouter
