@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  */
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader;
+namespace AlesWita\DropzoneUploader;
 
 use Nette;
 
@@ -58,7 +58,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$container = $this->getContainerBuilder();
 
 		$dropzoneUploader = $container->addDefinition($this->prefix("dropzoneuploader"))
-			->setClass("AlesWita\\Components\\DropzoneUploader\\Factory");
+			->setClass("AlesWita\\DropzoneUploader\\Factory");
 
 		if ($config["dropzoneTemplate"] !== NULL) {
 			if ($config["dropzoneTemplate"] instanceof Nette\DI\Statement) {
@@ -82,8 +82,8 @@ class Extension extends Nette\DI\CompilerExtension
 		} else {
 			$uploadDriver = new $config["uploadDriver"]["driver"];
 
-			if (!array_key_exists("AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($uploadDriver))) {
-				throw new DropzoneUploaderException("Upload driver must implements AlesWita\\Components\\DropzoneUploader\\UploadDriver\\IUploadDriver interface!");
+			if (!array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($uploadDriver))) {
+				throw new DropzoneUploaderException("Upload driver must implements AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver interface!");
 			} else {
 				if (!is_array($config["uploadDriver"]["settings"])) {
 					throw new DropzoneUploaderException("Upload driver settings must be array!");
@@ -138,7 +138,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$config = $this->getConfig($this->defaults);
 		$container = $this->getContainerBuilder();
 
-		$dropzoneUploader = $container->getDefinitionByType("AlesWita\\Components\\DropzoneUploader\\Factory");
+		$dropzoneUploader = $container->getDefinitionByType("AlesWita\\DropzoneUploader\\Factory");
 		$dropzoneUploader->addSetup("\$service->setTranslator(?)", ["@" . $container->getByType("Nette\\Localization\\ITranslator")]);
 	}
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  *
  * @phpVersion 7.1.0
@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\Tests\Tests;
+namespace AlesWita\DropzoneUploader\Tests\Tests;
 
 use AlesWita;
 use Nette;
@@ -38,7 +38,7 @@ final class UploadTest extends Tester\TestCase
 		$file = new Nette\Http\FileUpload(["name" => "template.latte", "type" => "", "size" => 10, "tmp_name" => __DIR__ . "/../files/template.latte", "error" => 0]);
 
 		$presenter = $presenterFactory->createPresenter("Base");
-		$presenter->getTemplate()->setTranslator(new AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator);
+		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
 		$request = new Nette\Application\Request("Base", "POST", ["action" => "two"], ["_do" => "dropzoneUploader-form-submit"], ["file" => $file]);
 		$response = $presenter->run($request);
@@ -79,7 +79,7 @@ final class UploadTest extends Tester\TestCase
 		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
 
 		$presenter = $presenterFactory->createPresenter("Base");
-		$presenter->getTemplate()->setTranslator(new AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator);
+		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
 		$request = new Nette\Application\Request("Base", "GET", ["action" => "three", "do" => "dropzoneUploader-remove", "dropzoneUploader-file" => "template.latte"]);
 		$response = $presenter->run($request);

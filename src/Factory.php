@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  */
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader;
+namespace AlesWita\DropzoneUploader;
 
 use AlesWita;
 use Nette;
@@ -29,7 +29,7 @@ class Factory
 	/** @var string */
 	private $dropzoneTemplate = self::DEFAULT_TEMPLATE;
 
-	/** @var AlesWita\Components\DropzoneUploader\UploadDriver\IUploadRiver */
+	/** @var AlesWita\DropzoneUploader\UploadDriver\IUploadRiver */
 	private $uploadDriver;
 
 	/** @var array */
@@ -57,7 +57,7 @@ class Factory
 	}
 
 	/**
-	 * @param AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @param AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 * @return self
 	 */
 	public function setUploadDriver(UploadDriver\IUploadDriver $driver): self {
@@ -98,9 +98,9 @@ class Factory
 	}
 
 	/**
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function getUploadDriver(): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
+	public function getUploadDriver(): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
 		return $this->uploadDriver;
 	}
 
@@ -119,9 +119,9 @@ class Factory
 	}
 
 	/**
-	 * @return AlesWita\Components\DropzoneUploader\DropzoneUploader
+	 * @return AlesWita\DropzoneUploader\DropzoneUploader
 	 */
-	public function getDropzoneUploader(): AlesWita\Components\DropzoneUploader\DropzoneUploader {
+	public function getDropzoneUploader(): AlesWita\DropzoneUploader\DropzoneUploader {
 		$dropzoneUploader = new DropzoneUploader;
 
 		$dropzoneUploader->setTranslator($this->translator)

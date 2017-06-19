@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  */
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\UploadDriver;
+namespace AlesWita\DropzoneUploader\UploadDriver;
 
 use AlesWita;
 use Nette;
@@ -26,9 +26,9 @@ final class Move extends UploadDriver
 
 	/**
 	 * @param array
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function setSettings(array $settings): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
+	public function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
 		$settings["dir"] = (isset($settings["dir"]) ? Nette\Utils\Strings::trim($settings["dir"], "\\/") : NULL);
 		parent::setSettings($settings);
 		return $this;

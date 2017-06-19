@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  *
  * @phpVersion 7.1.0
@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\Tests\Tests;
+namespace AlesWita\DropzoneUploader\Tests\Tests;
 
 use AlesWita;
 use Nette;
@@ -25,7 +25,7 @@ require_once __DIR__ . "/../bootstrap.php";
 final class ExceptionsTest extends Tester\TestCase
 {
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Parameter 'dropzoneTemplate' must be string!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parameter 'dropzoneTemplate' must be string!
 	 * @return void
 	 */
 	public function testOne(): void {
@@ -38,7 +38,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Can not find template 'foo.latte'!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Can not find template 'foo.latte'!
 	 * @return void
 	 */
 	public function testTwo(): void {
@@ -51,7 +51,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Upload driver must be set!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must be set!
 	 * @return void
 	 */
 	public function testThree(): void {
@@ -64,7 +64,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Upload driver 'Foo\Foo' no exists!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver 'Foo\Foo' no exists!
 	 * @return void
 	 */
 	public function testFour(): void {
@@ -77,7 +77,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Upload driver must implements AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver interface!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must implements AlesWita\DropzoneUploader\UploadDriver\IUploadDriver interface!
 	 * @return void
 	 */
 	public function testFive(): void {
@@ -90,7 +90,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Upload driver settings must be array!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver settings must be array!
 	 * @return void
 	 */
 	public function testSix(): void {
@@ -103,7 +103,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Unknow upload driver settings 'foo'!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Unknow upload driver settings 'foo'!
 	 * @return void
 	 */
 	public function testSeven(): void {
@@ -116,7 +116,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be integer, float or string!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be integer, float or string!
 	 * @return void
 	 */
 	public function testEight(): void {
@@ -129,7 +129,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Maximum file size settings is unknown!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings is unknown!
 	 * @return void
 	 */
 	public function testNine(): void {
@@ -142,7 +142,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\Components\DropzoneUploader\DropzoneUploaderException Accepted files settings must be string or array type!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Accepted files settings must be string or array type!
 	 * @return void
 	 */
 	public function testTen(): void {

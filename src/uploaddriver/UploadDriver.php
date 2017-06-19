@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  */
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\UploadDriver;
+namespace AlesWita\DropzoneUploader\UploadDriver;
 
 use AlesWita;
 use Nette;
@@ -33,18 +33,18 @@ abstract class UploadDriver implements IUploadDriver
 
 	/**
 	 * @param array
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function setSettings(array $settings): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
+	public function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
 		$this->settings = array_replace($this->settings, $settings);
 		return $this;
 	}
 
 	/**
 	 * @param string
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function setFolder(string $folder): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver {
+	public function setFolder(string $folder): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
 		$this->folder = Nette\Utils\Strings::trim($folder, "\\/");
 		return $this;
 	}
@@ -71,7 +71,7 @@ abstract class UploadDriver implements IUploadDriver
 		// callback onUploadBeginning
 		if ($this->onUploadBeginning !== NULL) {
 			if (!is_array($this->onUploadBeginning) && !($this->onUploadBeginning instanceof \Traversable)) {
-				throw new AlesWita\Components\DropzoneUploader\DropzoneUploaderException("Property UploadDriver::\$onUploadBeginning must be array or Traversable, " . gettype($this->onUploadBeginning) . " given.");
+				throw new AlesWita\DropzoneUploader\DropzoneUploaderException("Property UploadDriver::\$onUploadBeginning must be array or Traversable, " . gettype($this->onUploadBeginning) . " given.");
 			}
 			foreach ($this->onUploadBeginning as $callback) {
 				Nette\Utils\Callback::invoke($callback, $this, $file);
@@ -94,7 +94,7 @@ abstract class UploadDriver implements IUploadDriver
 		// callback onRemoveBeginning
 		if ($this->onRemoveBeginning !== NULL) {
 			if (!is_array($this->onRemoveBeginning) && !($this->onRemoveBeginning instanceof \Traversable)) {
-				throw new AlesWita\Components\DropzoneUploader\DropzoneUploaderException("Property UploadDriver::\$onRemoveBeginning must be array or Traversable, " . gettype($this->onRemoveBeginning) . " given.");
+				throw new AlesWita\DropzoneUploader\DropzoneUploaderException("Property UploadDriver::\$onRemoveBeginning must be array or Traversable, " . gettype($this->onRemoveBeginning) . " given.");
 			}
 			foreach ($this->onRemoveBeginning as $callback) {
 				Nette\Utils\Callback::invoke($callback, $this, $file);

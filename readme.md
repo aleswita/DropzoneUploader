@@ -20,12 +20,12 @@ $ composer require aleswita/dropzoneuploader:dev-master
 #### Config
 ```neon
 extensions:
-	webloader: AlesWita\Components\DropzoneUploader\Extension
+	webloader: AlesWita\DropzoneUploader\Extension
 
 dropzoneuploader:
-	dropzoneTemplate: ::constant(AlesWita\Components\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE)
+	dropzoneTemplate: ::constant(AlesWita\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE)
 	uploadDriver:
-		driver: AlesWita\Components\DropzoneUploader\UploadDriver\Ftp
+		driver: AlesWita\DropzoneUploader\UploadDriver\Ftp
 		settings:
 			url: ftp://user:password@my-ftp.cz
 	settings:
@@ -45,23 +45,23 @@ use AlesWita;
 
 final class DropzonePresenter extends Nette\Application\UI\Presenter
 {
-	/** @var AlesWita\Components\DropzoneUploader\Factory @inject */
+	/** @var AlesWita\DropzoneUploader\Factory @inject */
 	public $dropzoneFactory;
 
 	...
 	...
 
 	/**
-	 * @return AlesWita\Components\DropzoneUploader\DropzoneUploader
+	 * @return AlesWita\DropzoneUploader\DropzoneUploader
 	 */
-	protected function createComponentDropzoneForm(): AlesWita\Components\DropzoneUploader\DropzoneUploader {
+	protected function createComponentDropzoneForm(): AlesWita\DropzoneUploader\DropzoneUploader {
 		$form = $this->dropzoneFactory->getDropzoneUploader();
 
-		$form->getUploadDriver()->onUploadBeginning[] = function (AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, Nette\Http\FileUpload $file): void {
+		$form->getUploadDriver()->onUploadBeginning[] = function (AlesWita\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, Nette\Http\FileUpload $file): void {
 			$uploadDriver->setFolder("foo");
 		};
 
-		$form->getUploadDriver()->onRemoveBeginning[] = function (AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, string $file): void {
+		$form->getUploadDriver()->onRemoveBeginning[] = function (AlesWita\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, string $file): void {
 			$uploadDriver->setFolder("foo");
 		};
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  *
  * @phpVersion 7.1.0
@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\Tests\Tests;
+namespace AlesWita\DropzoneUploader\Tests\Tests;
 
 use AlesWita;
 use Nette;
@@ -37,7 +37,7 @@ final class BaseFormTest extends Tester\TestCase
 		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
 
 		$presenter = $presenterFactory->createPresenter("Base");
-		$presenter->getTemplate()->setTranslator(new AlesWita\Components\DropzoneUploader\Tests\App\Service\FakeTranslator);
+		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
 		$request = new Nette\Application\Request("Base", "GET", ["action" => "one"]);
 		$response = $presenter->run($request);

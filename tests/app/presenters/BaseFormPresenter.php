@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  */
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\Tests\App\Presenters;
+namespace AlesWita\DropzoneUploader\Tests\App\Presenters;
 
 use AlesWita;
 use Nette;
@@ -19,7 +19,7 @@ use Nette;
  */
 final class BaseFormPresenter extends Nette\Application\UI\Presenter
 {
-	/** @var AlesWita\Components\DropzoneUploader\Factory @inject */
+	/** @var AlesWita\DropzoneUploader\Factory @inject */
 	public $dropzoneUploader;
 
 	/**
@@ -30,9 +30,9 @@ final class BaseFormPresenter extends Nette\Application\UI\Presenter
 	}
 
 	/**
-	 * @return AlesWita\Components\DropzoneUploader\DropzoneUploader
+	 * @return AlesWita\DropzoneUploader\DropzoneUploader
 	 */
-	protected function createComponentDropzoneUploader(): AlesWita\Components\DropzoneUploader\DropzoneUploader {
+	protected function createComponentDropzoneUploader(): AlesWita\DropzoneUploader\DropzoneUploader {
 		return $this->dropzoneUploader->getDropzoneUploader();
 	}
 }

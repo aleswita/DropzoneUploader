@@ -1,13 +1,13 @@
 <?php
 
 /**
- * This file is part of the AlesWita\Components\DropzoneUploader
+ * This file is part of the AlesWita\DropzoneUploader
  * Copyright (c) 2017 Ales Wita (aleswita+github@gmail.com)
  */
 
 declare(strict_types=1);
 
-namespace AlesWita\Components\DropzoneUploader\UploadDriver;
+namespace AlesWita\DropzoneUploader\UploadDriver;
 
 use AlesWita;
 use Nette;
@@ -21,15 +21,15 @@ interface IUploadDriver
 {
 	/**
 	 * @param array
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	function setSettings(array $settings): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver;
+	function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver;
 
 	/**
 	 * @param string
-	 * @return AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver
+	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	function setFolder(string $folder): AlesWita\Components\DropzoneUploader\UploadDriver\IUploadDriver;
+	function setFolder(string $folder): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver;
 
 	/**
 	 * @return array
