@@ -1,6 +1,6 @@
 {
 	"name": "aleswita/dropzoneuploader",
-	"description": "Dropzone Uploader for Nette Framework.",
+	"description": "Dropzone Uploader for Nette Framework and DropzoneJs.",
 	"keywords": ["nette", "dropzone", "multiupload"],
 	"license": ["MIT"],
 	"authors": [
