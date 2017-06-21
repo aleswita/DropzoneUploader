@@ -1,3 +1,0 @@
-dropzoneuploader:
-	uploadDriver:
-		driver: AlesWita\DropzoneUploader\UploadDriver\Move
