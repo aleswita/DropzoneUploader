@@ -65,10 +65,16 @@ class Extension extends Nette\DI\CompilerExtension
 				$config["dropzoneTemplate"] = constant($config["dropzoneTemplate"]->arguments[0]);
 			}
 
-			if (!is_string($config["dropzoneTemplate"])) {
-				throw new DropzoneUploaderException("Parameter 'dropzoneTemplate' must be string!");
-			} elseif (!is_file($config["dropzoneTemplate"])) {
-				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]}'!");
+			if (!is_array($config["dropzoneTemplate"]) || !isset($config["dropzoneTemplate"]["main"]) || !isset($config["dropzoneTemplate"]["form"]) || !isset($config["dropzoneTemplate"]["files"]) || !isset($config["dropzoneTemplate"]["js"])) {
+				throw new DropzoneUploaderException("Parameter 'dropzoneTemplate' must be array with keys 'main', 'form', 'files' and 'js'!");
+			} elseif (!is_file($config["dropzoneTemplate"]["main"])) {
+				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["main"]}'!");
+			} elseif (!is_file($config["dropzoneTemplate"]["form"])) {
+				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["form"]}'!");
+			} elseif (!is_file($config["dropzoneTemplate"]["files"])) {
+				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["files"]}'!");
+			} elseif (!is_file($config["dropzoneTemplate"]["js"])) {
+				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["js"]}'!");
 			} else {
 				$dropzoneUploader->addSetup("\$service->setDropzoneTemplate(?)", [$config["dropzoneTemplate"]]);
 			}

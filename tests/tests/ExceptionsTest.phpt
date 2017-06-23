@@ -25,7 +25,7 @@ require_once __DIR__ . "/../bootstrap.php";
 final class ExceptionsTest extends Tester\TestCase
 {
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parameter 'dropzoneTemplate' must be string!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parameter 'dropzoneTemplate' must be array with keys 'main', 'form', 'files' and 'js'!
 	 * @return void
 	 */
 	public function testOne(): void {

@@ -19,14 +19,26 @@ use Nette;
  */
 class Factory
 {
-	// default dropzone templates
-	const DEFAULT_TEMPLATE = __DIR__ . "/templates/default.latte";
-	const BOOTSTRAP_V4_TEMPLATE = __DIR__ . "/templates/bootstrap_v4.latte";
+	// default template
+	const DEFAULT_TEMPLATE = [
+		"main" => __DIR__ . "/templates/default/default.latte",
+		"form" => __DIR__ . "/templates/default/default.latte",
+		"files" => __DIR__ . "/templates/default/default.latte",
+		"js" => __DIR__ . "/templates/default/default.latte",
+	];
+
+	// bootsrapt v4 template
+	const BOOTSTRAP_V4_TEMPLATE = [
+		"main" => __DIR__ . "/templates/bootstrap_v4/main.latte",
+		"form" => __DIR__ . "/templates/bootstrap_v4/form.latte",
+		"files" => __DIR__ . "/templates/bootstrap_v4/files.latte",
+		"js" => __DIR__ . "/templates/bootstrap_v4/js.latte",
+	];
 
 	/** @var Nette\Localization\ITranslator */
 	private $translator;
 
-	/** @var string */
+	/** @var array */
 	private $dropzoneTemplate = self::DEFAULT_TEMPLATE;
 
 	/** @var AlesWita\DropzoneUploader\UploadDriver\IUploadRiver */
@@ -48,10 +60,10 @@ class Factory
 	}
 
 	/**
-	 * @param string
+	 * @param array
 	 * @return self
 	 */
-	public function setDropzoneTemplate(string $template): self {
+	public function setDropzoneTemplate(array $template): self {
 		$this->dropzoneTemplate = $template;
 		return $this;
 	}
@@ -91,9 +103,9 @@ class Factory
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getDropzoneTemplate(): string {
+	public function getDropzoneTemplate(): array {
 		return $this->dropzoneTemplate;
 	}
 

@@ -1,2 +1,6 @@
 dropzoneuploader:
-	dropzoneTemplate: foo.latte
+	dropzoneTemplate:
+		main: foo.latte
+		form: foo.latte
+		files: foo.latte
+		js: foo.latte

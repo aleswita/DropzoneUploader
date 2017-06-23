@@ -22,7 +22,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	/** @var Nette\Localization\ITranslator */
 	private $translator;
 
-	/** @var string */
+	/** @var array */
 	private $dropzoneTemplate;
 
 	/** @var AlesWita\DropzoneUploader\UploadDriver\IUploadRiver */
@@ -44,10 +44,10 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	}
 
 	/**
-	 * @param string
+	 * @param array
 	 * @return self
 	 */
-	public function setDropzoneTemplate(string $template): self {
+	public function setDropzoneTemplate(array $template): self {
 		$this->dropzoneTemplate = $template;
 		return $this;
 	}
@@ -94,9 +94,9 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getDropzoneTemplate(): string {
+	public function getDropzoneTemplate(): array {
 		return $this->dropzoneTemplate;
 	}
 
@@ -124,13 +124,51 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	/**
 	 * @return void
 	 */
-	public function render(): void {
+	private function prepareTemplate(): void {
 		$this->template->fileParam = $this->getParameterId("file");
 		$this->template->settings = $this->settings;
 		$this->template->messages = $this->messages;
 
-		$this->template->setFile($this->dropzoneTemplate);
 		$this->template->setTranslator($this->translator);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function render(): void {
+		$this->prepareTemplate();
+
+		$this->template->setFile($this->dropzoneTemplate["main"]);
+		$this->template->render();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function renderForm(): void {
+		$this->prepareTemplate();
+
+		$this->template->setFile($this->dropzoneTemplate["form"]);
+		$this->template->render();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function renderFiles(): void {
+		$this->prepareTemplate();
+
+		$this->template->setFile($this->dropzoneTemplate["files"]);
+		$this->template->render();
+	}
+
+	/**
+	 * @return void
+	 */
+	public function renderJs(): void {
+		$this->prepareTemplate();
+
+		$this->template->setFile($this->dropzoneTemplate["js"]);
 		$this->template->render();
 	}
 
@@ -142,8 +180,8 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	protected function createComponentForm(): Nette\Application\UI\Form {
 		$form = new Nette\Application\UI\Form;
 
-		$form->getElementPrototype()->setClass("dropzone")
-			->setId("dropzoneForm");
+		$form->getElementPrototype()->addClass("dropzone")
+			->addId("dropzoneForm");
 
 		$form->onSuccess[] = function (Nette\Application\UI\Form $form, array $values): void {
 			$httpData = $form->getHttpData();
