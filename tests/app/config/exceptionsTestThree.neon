@@ -1,6 +1,6 @@
 dropzoneuploader:
 	dropzoneTemplate:
 		main: %appDir%/../files/template.latte
-		form: %appDir%/../files/form.latte
+		form: form.latte
 		files: %appDir%/../files/template.latte
 		js: %appDir%/../files/template.latte

@@ -3,4 +3,4 @@ dropzoneuploader:
 		main: %appDir%/../files/template.latte
 		form: %appDir%/../files/template.latte
 		files: %appDir%/../files/template.latte
-		js: %appDir%/../files/js.latte
+		js: js.latte
