@@ -53,7 +53,7 @@ final class GettersTest extends Tester\TestCase
 
 		Tester\Assert::true($component instanceof AlesWita\DropzoneUploader\DropzoneUploader);
 		Tester\Assert::true($component->getTranslator() instanceof Nette\Localization\ITranslator);
-		Tester\Assert::same(__DIR__ . "/../files/template.latte", $component->getDropzoneTemplate());
+		Tester\Assert::same(["main" => __DIR__ . "/../files/template.latte", "form" => __DIR__ . "/../files/template.latte", "files" => __DIR__ . "/../files/template.latte", "js" => __DIR__ . "/../files/template.latte"], $component->getDropzoneTemplate());
 		Tester\Assert::true(array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($component->getUploadDriver())));
 		Tester\Assert::same(1, $component->getSettings()["maxFilesize"]);// different between component and factory
 		Tester\Assert::same("foo", $component->getSettings()["acceptedFiles"]);// different between component and factory
