@@ -38,7 +38,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Can not find template 'foo.latte'!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Can not find template 'main.latte'!
 	 * @return void
 	 */
 	public function testTwo(): void {
@@ -51,7 +51,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must be set!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Can not find template 'form.latte'!
 	 * @return void
 	 */
 	public function testThree(): void {
@@ -64,7 +64,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver 'Foo\Foo' no exists!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Can not find template 'files.latte'!
 	 * @return void
 	 */
 	public function testFour(): void {
@@ -77,7 +77,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must implements AlesWita\DropzoneUploader\UploadDriver\IUploadDriver interface!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Can not find template 'js.latte'!
 	 * @return void
 	 */
 	public function testFive(): void {
@@ -90,7 +90,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver settings must be array!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must be set!
 	 * @return void
 	 */
 	public function testSix(): void {
@@ -103,7 +103,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Unknow upload driver settings 'foo'!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver 'Foo\Foo' no exists!
 	 * @return void
 	 */
 	public function testSeven(): void {
@@ -116,7 +116,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be integer, float or string!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must implements AlesWita\DropzoneUploader\UploadDriver\IUploadDriver interface!
 	 * @return void
 	 */
 	public function testEight(): void {
@@ -129,7 +129,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings is unknown!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver settings must be array!
 	 * @return void
 	 */
 	public function testNine(): void {
@@ -142,7 +142,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Accepted files settings must be string or array type!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Unknow upload driver settings 'foo'!
 	 * @return void
 	 */
 	public function testTen(): void {
@@ -150,6 +150,45 @@ final class ExceptionsTest extends Tester\TestCase
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
 		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestTen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be integer, float or string!
+	 * @return void
+	 */
+	public function testEleven(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestEleven.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings is unknown!
+	 * @return void
+	 */
+	public function testTwelve(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestTwelve.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Accepted files settings must be string or array type!
+	 * @return void
+	 */
+	public function testThirteen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestThirteen.neon");
 
 		$configurator->createContainer();
 	}

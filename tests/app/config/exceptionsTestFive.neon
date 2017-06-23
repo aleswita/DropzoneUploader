@@ -1,3 +1,6 @@
 dropzoneuploader:
-	uploadDriver:
-		driver: AlesWita\DropzoneUploader\Tests\App\Presenters\BasePresenter
+	dropzoneTemplate:
+		main: %appDir%/../files/template.latte
+		form: %appDir%/../files/template.latte
+		files: %appDir%/../files/template.latte
+		js: %appDir%/../files/js.latte

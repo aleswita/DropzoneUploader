@@ -1,3 +1,6 @@
 dropzoneuploader:
-	uploadDriver:
-		driver: Foo\Foo
+	dropzoneTemplate:
+		main: %appDir%/../files/template.latte
+		form: %appDir%/../files/template.latte
+		files: %appDir%/../files/files.latte
+		js: %appDir%/../files/template.latte

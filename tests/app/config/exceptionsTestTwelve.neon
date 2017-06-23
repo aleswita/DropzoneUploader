@@ -1,5 +1,5 @@
 dropzoneuploader:
 	uploadDriver:
 		driver: AlesWita\DropzoneUploader\UploadDriver\Move
-		settings:
-			foo: foo
+	settings:
+		maxFilesize: foo

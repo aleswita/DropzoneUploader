@@ -1,6 +1,6 @@
 dropzoneuploader:
 	dropzoneTemplate:
-		main: foo.latte
-		form: foo.latte
-		files: foo.latte
-		js: foo.latte
+		main: %appDir%/../files/main.latte
+		form: %appDir%/../files/template.latte
+		files: %appDir%/../files/template.latte
+		js: %appDir%/../files/template.latte
