@@ -40,7 +40,7 @@ final class GettersTest extends Tester\TestCase
 		$service = $container->getService("dropzoneuploader.dropzoneuploader");
 
 		Tester\Assert::true($service->getTranslator() instanceof Nette\Localization\ITranslator);
-		Tester\Assert::same(["main" => __DIR__ . "/../files/template.latte", "form" => __DIR__ . "/../files/template.latte", "files" => __DIR__ . "/../files/template.latte", "js" => __DIR__ . "/../files/template.latte",], $service->getDropzoneTemplate());
+		Tester\Assert::same(["main" => __DIR__ . "/../files/template.latte", "form" => __DIR__ . "/../files/template.latte", "files" => __DIR__ . "/../files/template.latte", "js" => __DIR__ . "/../files/template.latte"], $service->getDropzoneTemplate());
 		Tester\Assert::true(array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($service->getUploadDriver())));
 		Tester\Assert::same(1048576, $service->getSettings()["maxFilesize"]);
 		Tester\Assert::same(["foo"], $service->getSettings()["acceptedFiles"]);
