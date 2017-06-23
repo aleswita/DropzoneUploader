@@ -1,90 +1,90 @@
 {contentType javascript}
 var previewNode = document.querySelector("#template");
 
-if (previewNode) {   console.log('test');
-previewNode.id = "";
-var previewTemplate = previewNode.parentNode.innerHTML;
-previewNode.parentNode.removeChild(previewNode);
+if (previewNode) {
+ previewNode.id = "";
+ var previewTemplate = previewNode.parentNode.innerHTML;
+ previewNode.parentNode.removeChild(previewNode);
 
-Dropzone.options.dropzoneForm = {
+ Dropzone.options.dropzoneForm = {
 
- {foreach $settings as $key => $val}
-  {$key}: {$val},
- {/foreach}
+  {foreach $settings as $key => $val}
+   {$key}: {$val},
+  {/foreach}
 
- {foreach $messages as $key => $val}
-  {$key}: {$val|translate},
- {/foreach}
+  {foreach $messages as $key => $val}
+   {$key}: {$val|translate},
+  {/foreach}
 
- "previewsContainer": "#previews",
- "previewTemplate": previewTemplate,
+  "previewsContainer": "#previews",
+  "previewTemplate": previewTemplate,
 
- init: function() {
+  init: function() {
 
-  {* drop *}
-  this.on("drop", function(e) {
-   this.element.classList.remove("card-outline-primary");
-   this.element.classList.remove("text-primary");
-  });
+   {* drop *}
+   this.on("drop", function(e) {
+    this.element.classList.remove("card-outline-primary");
+    this.element.classList.remove("text-primary");
+   });
 
-  {* dragenter *}
-  this.on("dragenter", function(e) {
-   this.element.classList.add("card-outline-primary");
-   this.element.classList.add("text-primary");
-  });
+   {* dragenter *}
+   this.on("dragenter", function(e) {
+    this.element.classList.add("card-outline-primary");
+    this.element.classList.add("text-primary");
+   });
 
-  {* dragover *}
-  this.on("dragover", function(e) {
-   this.element.classList.add("card-outline-primary");
-   this.element.classList.add("text-primary");
-  });
+   {* dragover *}
+   this.on("dragover", function(e) {
+    this.element.classList.add("card-outline-primary");
+    this.element.classList.add("text-primary");
+   });
 
-  {* dragleave *}
-  this.on("dragleave", function(e) {
-   this.element.classList.remove("card-outline-primary");
-   this.element.classList.remove("text-primary");
-  });
+   {* dragleave *}
+   this.on("dragleave", function(e) {
+    this.element.classList.remove("card-outline-primary");
+    this.element.classList.remove("text-primary");
+   });
 
-  {* reset *}
-  this.on("reset", function(e) {
-   this.element.classList.remove("card-outline-primary");
-   this.element.classList.remove("text-primary");
-  });
+   {* reset *}
+   this.on("reset", function(e) {
+    this.element.classList.remove("card-outline-primary");
+    this.element.classList.remove("text-primary");
+   });
 
-  {* error *}
-  this.on("error", function(file, errorMessage) {
-   file.previewElement.classList.add("alert-danger");
-  });
+   {* error *}
+   this.on("error", function(file, errorMessage) {
+    file.previewElement.classList.add("alert-danger");
+   });
 
-  {* success *}
-  this.on("success", function(file, response) {
-   file.previewElement.classList.add("alert-success");
-  });
+   {* success *}
+   this.on("success", function(file, response) {
+    file.previewElement.classList.add("alert-success");
+   });
 
-  {* canceled *}
-  this.on("canceled", function(file) {
-   file.previewElement.classList.add("alert-warning");
-  });
+   {* canceled *}
+   this.on("canceled", function(file) {
+    file.previewElement.classList.add("alert-warning");
+   });
 
-  {* uploadprogress *}
-  this.on("uploadprogress", function(file, progress, bytesSent) {
-   var progressElement = file.previewElement.querySelector("[data-dz-uploadprogress]");
-   progressElement.style.width = progress + "%";
-   progressElement.textContent = progress + "%";
-  });
+   {* uploadprogress *}
+   this.on("uploadprogress", function(file, progress, bytesSent) {
+    var progressElement = file.previewElement.querySelector("[data-dz-uploadprogress]");
+    progressElement.style.width = progress + "%";
+    progressElement.textContent = progress + "%";
+   });
 
-  {* removedfile *}
-  this.on("removedfile", function(file) {
-   if (file.accepted) {
-    $.ajax({
-     type: "GET",
-     url: {link remove!},
-     data: {
-      {$fileParam}: file.name,
-     },
-    });
-   }
-  });
- },
-};
+   {* removedfile *}
+   this.on("removedfile", function(file) {
+    if (file.accepted) {
+     $.ajax({
+      type: "GET",
+      url: {link remove!},
+      data: {
+       {$fileParam}: file.name,
+      },
+     });
+    }
+   });
+  },
+ };
 }
