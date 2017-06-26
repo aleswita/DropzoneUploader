@@ -26,10 +26,6 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	 * @return void
 	 */
 	public function actionOne(): void {
-		$this["dropzoneUploader"]->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
-			$uploader->setFolder("foo");
-		};
-
 		$this->setView("default");
 	}
 
@@ -37,10 +33,6 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	 * @return void
 	 */
 	public function actionTwo(): void {
-		$this["dropzoneUploader"]->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
-			$uploader->setFolder("foo");
-		};
-
 		$this->setView("default");
 	}
 
@@ -48,10 +40,6 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	 * @return void
 	 */
 	public function actionThree(): void {
-		$this["dropzoneUploader"]->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
-			$uploader->setFolder("foo");
-		};
-
 		$this->setView("default");
 	}
 
@@ -59,6 +47,12 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	 * @return AlesWita\DropzoneUploader\DropzoneUploader
 	 */
 	protected function createComponentDropzoneUploader(): AlesWita\DropzoneUploader\DropzoneUploader {
-		return $this->dropzoneUploader->getDropzoneUploader();
+		$uploader = $this->dropzoneUploader->getDropzoneUploader();
+
+		$uploader->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
+			$uploader->setFolder("foo");
+		};
+
+		return $uploader;
 	}
 }
