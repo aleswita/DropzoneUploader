@@ -1,4 +1,10 @@
 {contentType javascript}
+if (window.Dropzone === undefined) {
+ console.error("Plugin 'dropzone.js'  is missing!");
+ return;
+}
+
+
 var previewNode = document.querySelector("#template");
 
 if (previewNode) {
@@ -7,7 +13,6 @@ if (previewNode) {
  previewNode.parentNode.removeChild(previewNode);
 
  Dropzone.options.dropzoneForm = {
-
   {foreach $settings as $key => $val}
    {$key}: {$val},
   {/foreach}
@@ -20,6 +25,19 @@ if (previewNode) {
   "previewTemplate": previewTemplate,
 
   init: function() {
+   var dropzone = this;
+   var folder = $("#dropzoneForm").find('input[name="folder"]').val();
+
+   $.getJSON({link uploadedFiles!}, {{$folderParam}: folder}, function (payload) {
+    if (payload.uploadedFiles) {
+     $.each(payload.uploadedFiles, function(i, file) {
+      dropzone.emit("addedfile", file);
+      dropzone.emit("success", file);
+      dropzone.emit("uploadprogress", file, 100);
+      dropzone.emit("complete", file);
+     });
+    }
+   });
 
    {* drop *}
    this.on("drop", function(e) {
@@ -81,10 +99,12 @@ if (previewNode) {
       url: {link remove!},
       data: {
        {$fileParam}: file.name,
+	   {$folderParam}: folder,
       },
      });
     }
    });
+
   },
  };
 }

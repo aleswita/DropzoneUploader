@@ -35,6 +35,19 @@ final class Move extends UploadDriver
 	}
 
 	/**
+	 * @todo not implemented
+	 * @return array
+	 */
+	public function getUploadedFiles(): array {
+		$parent = parent::getUploadedFiles();
+       	$uploadedFiles = $parent;
+
+		// not implemented
+
+		return $uploadedFiles;
+	}
+
+	/**
 	 * @param Nette\Http\FileUpload
 	 * @return bool
 	 */

@@ -19,6 +19,9 @@ use Nette;
  */
 class DropzoneUploader extends Nette\Application\UI\Control
 {
+	/** @var callable[] */
+	public $onBeginning;
+
 	/** @var Nette\Localization\ITranslator */
 	private $translator;
 
@@ -33,6 +36,9 @@ class DropzoneUploader extends Nette\Application\UI\Control
 
 	/** @var array */
 	private $messages;
+
+	/** @var string */
+	private $folder;
 
 	/**
 	 * @param Nette\Localization\ITranslator
@@ -87,6 +93,15 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	}
 
 	/**
+	 * @param string|NULL
+	 * @return self
+	 */
+	public function setFolder(?string $folder): self {
+		$this->folder = $folder;
+		return $this;
+	}
+
+	/**
 	 * @return Nette\Localization\ITranslator
 	 */
 	public function getTranslator(): Nette\Localization\ITranslator {
@@ -122,10 +137,27 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	}
 
 	/**
+	 * @return string|NULL
+	 */
+	public function getFolder(): ?string {
+		return $this->folder;
+	}
+
+	/**
 	 * @return void
 	 */
 	private function prepareTemplate(): void {
+		if ($this->onBeginning !== NULL) {
+			if (!is_array($this->onBeginning) && !($this->onBeginning instanceof \Traversable)) {
+				throw new AlesWita\DropzoneUploader\DropzoneUploaderException("Property DropzoneUploader::\onBeginning must be array or Traversable, " . gettype($this->onBeginning) . " given.");
+			}
+			foreach ($this->onBeginning as $callback) {
+				Nette\Utils\Callback::invoke($callback, $this);
+			}
+		}
+
 		$this->template->fileParam = $this->getParameterId("file");
+		$this->template->folderParam = $this->getParameterId("folder");
 		$this->template->settings = $this->settings;
 		$this->template->messages = $this->messages;
 
@@ -183,9 +215,13 @@ class DropzoneUploader extends Nette\Application\UI\Control
 		$form->getElementPrototype()->addClass("dropzone")
 			->addId("dropzoneForm");
 
+		$form->addHidden("folder", $this->folder);
+
 		$form->onSuccess[] = function (Nette\Application\UI\Form $form, array $values): void {
 			$httpData = $form->getHttpData();
-			$this->uploadDriver->upload($httpData["file"]);
+
+			$this->uploadDriver->setFolder($values["folder"])
+            	->upload($httpData["file"]);
 		};
 
 		return $form;
@@ -193,11 +229,26 @@ class DropzoneUploader extends Nette\Application\UI\Control
 
 	/**
 	 * @param string
+	 * @param string
 	 * @return void
 	 */
-	public function handleRemove(string $file = NULL): void {
+	public function handleRemove(string $folder = NULL, string $file = NULL): void {
+		$this->uploadDriver->setFolder($folder);
+
 		if ($file !== NULL) {
 			$this->uploadDriver->remove($file);
 		}
+	}
+
+	/**
+	 * @param string
+	 * @return void
+	 */
+	public function handleUploadedFiles(string $folder = NULL): void {
+		$this->uploadDriver->setFolder($folder);
+
+		$this->presenter->payload->uploadedFiles = $this->uploadDriver->getUploadedFiles();
+		$this->presenter->sendPayload();
+		$this->presenter->terminate();
 	}
 }

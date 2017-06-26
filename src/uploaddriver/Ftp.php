@@ -38,6 +38,31 @@ final class Ftp extends UploadDriver
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getUploadedFiles(): array {
+		$uploadedFiles = [];
+
+		try {
+			$ftp = $this->getFtpConnection();
+			$files = $ftp->nList($this->folder);
+
+			if ($files !== FALSE) {
+				foreach ($files as $file) {
+					$uploadedFiles[] = [
+						"name" => $file,
+						"size" => $ftp->size($this->folder . "/" . $file),
+						"accepted" => TRUE,
+					];
+				}
+			}
+		} catch (\FtpException $e) {
+		}
+
+		return $uploadedFiles;
+	}
+
+	/**
 	 * @param Nette\Http\FileUpload
 	 * @return bool
 	 */
@@ -48,11 +73,11 @@ final class Ftp extends UploadDriver
 			try {
 				$ftp = $this->getFtpConnection();
 
-				if ($ftp->nlist($this->folder) === FALSE) {
+				if ($ftp->nList($this->folder) === FALSE) {
 					$ftp->mkdir($this->folder);
 				}
 
-				$fileName = ($this->folder === NULL ? $file->getSanitizedName() : "{$this->folder}/{$file->getName()}");
+				$fileName = ($this->folder === NULL ? $file->getName() : "{$this->folder}/{$file->getName()}");
 				return $ftp->put($fileName, $file->getTemporaryFile(), FTP_BINARY);
 			} catch (\FtpException $e) {
 			}
@@ -66,22 +91,18 @@ final class Ftp extends UploadDriver
 	 * @return bool
 	 */
 	public function remove(string $file): bool {
-		$parent = parent::remove($file);
+		try {
+			$ftp = $this->getFtpConnection();
 
-		if ($parent === TRUE) {
-			try {
-				$ftp = $this->getFtpConnection();
+			$fileName = ($this->folder === NULL ? $file : "{$this->folder}/{$file}");
+			$return = $ftp->delete($fileName);
 
-				$fileName = ($this->folder === NULL ? $file : "{$this->folder}/{$file}");
-				$return = $ftp->delete($fileName);
-
-				if (count($ftp->nList(dirname($fileName))) === 0) {
-					$ftp->rmDir(dirname($fileName));// remove empty folder
-				}
-
-				return $return;
-			} catch (\FtpException $e) {
+			if (count($ftp->nList(dirname($fileName))) === 0) {
+				$ftp->rmDir(dirname($fileName));// remove empty folder
 			}
+
+			return $return;
+		} catch (\FtpException $e) {
 		}
 
 		return FALSE;
