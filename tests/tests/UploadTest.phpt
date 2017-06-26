@@ -51,7 +51,7 @@ final class UploadTest extends Tester\TestCase
 		$service = $presenter["dropzoneUploader"];
 
 		Tester\Assert::same("upload", $service->getUploadDriver()->getSettings()["dir"]);
-		Tester\Assert::same("foo", $service->getUploadDriver()->getFolder());
+		Tester\Assert::same("foo", $service->getFolder());
 
 
 		// check form
@@ -63,7 +63,7 @@ final class UploadTest extends Tester\TestCase
 
 
 		// check file
-		Tester\Assert::true(is_file("{$service->getUploadDriver()->getSettings()["dir"]}/{$service->getUploadDriver()->getFolder()}/template.latte"));
+		Tester\Assert::true(is_file("{$service->getUploadDriver()->getSettings()["dir"]}/{$service->getFolder()}/template.latte"));
 	}
 
 	/**
@@ -91,11 +91,11 @@ final class UploadTest extends Tester\TestCase
 		// check service
 		$service = $presenter["dropzoneUploader"];
 
-		Tester\Assert::same("foo", $service->getUploadDriver()->getFolder());
+		Tester\Assert::same("foo", $service->getFolder());
 
 
 		// check file
-		Tester\Assert::true(!is_file("{$service->getUploadDriver()->getSettings()["dir"]}/{$service->getUploadDriver()->getFolder()}/template.latte"));
+		Tester\Assert::false(is_file("{$service->getUploadDriver()->getSettings()["dir"]}/{$service->getFolder()}/template.latte"));
 	}
 }
 

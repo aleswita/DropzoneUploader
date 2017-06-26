@@ -65,12 +65,12 @@ final class BaseFormTest extends Tester\TestCase
 		Tester\Assert::count(2, $data);
 
 		Tester\Assert::same("hidden", (string) $data[0]["type"]);
-		Tester\Assert::same("_do", (string) $data[0]["name"]);
-		Tester\Assert::same("dropzoneUploader-form-submit", (string) $data[0]["value"]);
-
-		Tester\Assert::same("hidden", (string) $data[0]["type"]);
 		Tester\Assert::same("folder", (string) $data[0]["name"]);
 		Tester\Assert::same("foo", (string) $data[0]["value"]);
+
+		Tester\Assert::same("hidden", (string) $data[1]["type"]);
+		Tester\Assert::same("_do", (string) $data[1]["name"]);
+		Tester\Assert::same("dropzoneUploader-form-submit", (string) $data[1]["value"]);
 
 
 		// script tag
