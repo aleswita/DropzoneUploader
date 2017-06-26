@@ -26,6 +26,10 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	 * @return void
 	 */
 	public function actionOne(): void {
+		$this["dropzoneUploader"]->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
+			$uploader->setFolder("foo");
+		};
+
 		$this->setView("default");
 	}
 
@@ -33,8 +37,8 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	 * @return void
 	 */
 	public function actionTwo(): void {
-		$this["dropzoneUploader"]->getUploadDriver()->onUploadBeginning[] = function (AlesWita\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, Nette\Http\FileUpload $file): void {
-			$uploadDriver->setFolder("foo");
+		$this["dropzoneUploader"]->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
+			$uploader->setFolder("foo");
 		};
 
 		$this->setView("default");

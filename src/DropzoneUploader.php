@@ -149,7 +149,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	private function prepareTemplate(): void {
 		if ($this->onBeginning !== NULL) {
 			if (!is_array($this->onBeginning) && !($this->onBeginning instanceof \Traversable)) {
-				throw new AlesWita\DropzoneUploader\DropzoneUploaderException("Property DropzoneUploader::\onBeginning must be array or Traversable, " . gettype($this->onBeginning) . " given.");
+				throw new AlesWita\DropzoneUploader\DropzoneUploaderException("Property DropzoneUploader::\$onBeginning must be array or Traversable, " . gettype($this->onBeginning) . " given.");
 			}
 			foreach ($this->onBeginning as $callback) {
 				Nette\Utils\Callback::invoke($callback, $this);
@@ -221,7 +221,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 			$httpData = $form->getHttpData();
 
 			$this->uploadDriver->setFolder($values["folder"])
-            	->upload($httpData["file"]);
+				->upload($httpData["file"]);
 		};
 
 		return $form;

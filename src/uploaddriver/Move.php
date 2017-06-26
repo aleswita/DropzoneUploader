@@ -39,7 +39,7 @@ final class Move extends UploadDriver
 	 * @return array
 	 */
 	public function getUploadedFiles(): array {
-       	$uploadedFiles = [];
+		$uploadedFiles = [];
 
 		// not implemented
 
