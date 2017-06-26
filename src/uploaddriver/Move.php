@@ -39,8 +39,7 @@ final class Move extends UploadDriver
 	 * @return array
 	 */
 	public function getUploadedFiles(): array {
-		$parent = parent::getUploadedFiles();
-       	$uploadedFiles = $parent;
+       	$uploadedFiles = [];
 
 		// not implemented
 
@@ -71,15 +70,11 @@ final class Move extends UploadDriver
 	 * @return bool
 	 */
 	public function remove(string $file): bool {
-		$parent = parent::remove($file);
-
-		if ($parent === TRUE) {
-			try {
-				$path = ($this->folder === NULL ? "{$this->settings["dir"]}/{$file}" : "{$this->settings["dir"]}/{$this->folder}/{$file}");
-				Nette\Utils\FileSystem::delete($path);
-				return TRUE;
-			} catch (Nette\IOException $e) {
-			}
+		try {
+			$path = ($this->folder === NULL ? "{$this->settings["dir"]}/{$file}" : "{$this->settings["dir"]}/{$this->folder}/{$file}");
+			Nette\Utils\FileSystem::delete($path);
+			return TRUE;
+		} catch (Nette\IOException $e) {
 		}
 
 		return FALSE;
