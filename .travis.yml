@@ -2,14 +2,14 @@ language: php
 
 php:
     - 7.1    
-    - 7.2
+    - 7.2.0-dev
 
 matrix:
     include:
         - php: 7.1
           env: coverage=on
     allow_failures:
-        - php: 7.2
+        - php: 7.2.0-dev
           env: coverage=on
 
 script:
