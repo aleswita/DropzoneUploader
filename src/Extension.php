@@ -111,7 +111,7 @@ class Extension extends Nette\DI\CompilerExtension
 		}
 
 		// setting parallelUploads
-		if (!Nette\Utils\Strings::isNumericInt($config["settings"]["parallelUploads"])) {
+		if (!Nette\Utils\Validators::isNumericInt($config["settings"]["parallelUploads"])) {
 			throw new DropzoneUploaderException("Parallel uploads setting must be numeric!");
 		} else {
 			$config["settings"]["parallelUploads"] = (int) $config["settings"]["parallelUploads"];
