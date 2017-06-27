@@ -35,13 +35,19 @@ final class Move extends UploadDriver
 	}
 
 	/**
-	 * @todo not implemented
 	 * @return array
 	 */
 	public function getUploadedFiles(): array {
 		$uploadedFiles = [];
+		$path = ($this->folder === NULL ? $this->settings["dir"] : "{$this->settings["dir"]}/{$this->folder}");
 
-		// not implemented
+		foreach (Nette\Utils\Finder::findFiles("*")->from($path) as $file) {
+			$uploadedFiles[] = [
+				"name" => $file->getBasename(),
+				"size" => $file->getSize(),
+				"accepted" => TRUE,
+			];
+		}
 
 		return $uploadedFiles;
 	}

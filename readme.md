@@ -55,13 +55,17 @@ final class DropzonePresenter extends Nette\Application\UI\Presenter
 	 * @return AlesWita\DropzoneUploader\DropzoneUploader
 	 */
 	protected function createComponentDropzoneForm(): AlesWita\DropzoneUploader\DropzoneUploader {
-		$uploader = $this->dropzoneFactory->getDropzoneUploader();
+		$form = $this->dropzoneFactory->getDropzoneUploader();
 
-		$uploader->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
-			$uploader->setFolder("foo");
+		$form->getUploadDriver()->onUploadBeginning[] = function (AlesWita\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, Nette\Http\FileUpload $file): void {
+			$uploadDriver->setFolder("foo");
 		};
 
-		return $uploader;
+		$form->getUploadDriver()->onRemoveBeginning[] = function (AlesWita\DropzoneUploader\UploadDriver\IUploadDriver $uploadDriver, string $file): void {
+			$uploadDriver->setFolder("foo");
+		};
+
+		return $form;
 	}
 }
 ```

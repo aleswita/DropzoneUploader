@@ -80,6 +80,36 @@ final class UploadTest extends Tester\TestCase
 		$presenter = $presenterFactory->createPresenter("Base");
 		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
+		$request = new Nette\Application\Request("Base", "GET", ["action" => "one", "do" => "dropzoneUploader-uploadedFiles"]);
+		$response = $presenter->run($request);
+
+		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+
+
+		// check service
+		$service = $presenter["dropzoneUploader"];
+
+
+		// check file
+		Tester\Assert::same(["name" => "upload/template.latte", "size" => 10, "accepted" => TRUE], $presenter->payload->uploadedFiles);
+	}
+
+	/**
+	 * @return void
+	 */
+	public function testThree(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/uploadTest.neon");
+
+		$container = $configurator->createContainer();
+		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
+
+		$presenter = $presenterFactory->createPresenter("Base");
+		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
+		$presenter->autoCanonicalize = FALSE;
 		$request = new Nette\Application\Request("Base", "GET", ["action" => "one", "do" => "dropzoneUploader-remove", "dropzoneUploader-file" => "template.latte"]);
 		$response = $presenter->run($request);
 
