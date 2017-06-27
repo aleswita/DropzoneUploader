@@ -84,7 +84,6 @@ final class UploadTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\JsonResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 
 		// check service
@@ -92,7 +91,7 @@ final class UploadTest extends Tester\TestCase
 
 
 		// check file
-		Tester\Assert::same(["name" => "upload/template.latte", "size" => 10, "accepted" => TRUE], $presenter->payload->uploadedFiles);
+		Tester\Assert::same(["name" => "upload/template.latte", "size" => 10, "accepted" => TRUE], $response->getPayload()->uploadedFiles);
 	}
 
 	/**
