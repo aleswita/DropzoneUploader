@@ -2,16 +2,16 @@ language: php
 
 php:
     - 7.1
-    - 7.2.0alpha2
+    - master
 
 matrix:
     include:
         - php: 7.1
           env: coverage=on
-        - php: 7.2.0alpha2
+        - php: master
           env: coverage=on
     allow_failures:
-        - php: 7.2.0alpha2
+        - php: master
           env: coverage=on
 
 script:
@@ -32,3 +32,5 @@ after_script:
 after_failure:
     - for i in $(find ./tests -name \*.expected); do echo "--- $i"; cat $i; echo; echo; done
     - for i in $(find ./tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+
+sudo: false
