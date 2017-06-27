@@ -5,11 +5,9 @@ php:
     - master
 
 env:
+    env: coverage=on
 
 matrix:
-    include:
-        - php: 7.1
-          env: coverage=on
     allow_failures:
         - php: master
 
