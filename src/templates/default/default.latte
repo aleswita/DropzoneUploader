@@ -1,6 +1,9 @@
-{control form}
-
 <script type="text/javascript">
+ if (window.Dropzone === undefined) {
+  console.error("Plugin 'dropzone.js' is missing!");
+  return;
+ }
+
  Dropzone.options.dropzoneForm = {
 
   {foreach $settings as $key => $val}
@@ -34,7 +37,7 @@
       url: {link remove!},
       data: {
        {$fileParam}: file.name,
-	   {$folderParam}: folder,
+       {$folderParam}: folder,
       },
      });
     }
@@ -43,3 +46,5 @@
   },
  };
 </script>
+
+{control form}

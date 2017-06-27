@@ -1,9 +1,8 @@
 {contentType javascript}
 if (window.Dropzone === undefined) {
- console.error("Plugin 'dropzone.js'  is missing!");
+ console.error("Plugin 'dropzone.js' is missing!");
  return;
 }
-
 
 var previewNode = document.querySelector("#template");
 
@@ -99,7 +98,7 @@ if (previewNode) {
       url: {link remove!},
       data: {
        {$fileParam}: file.name,
-	   {$folderParam}: folder,
+       {$folderParam}: folder,
       },
      });
     }
