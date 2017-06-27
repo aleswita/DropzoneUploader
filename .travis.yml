@@ -12,7 +12,6 @@ matrix:
           env: coverage=on
     allow_failures:
         - php: master
-          env: coverage=on
 
 script:
     - vendor/bin/tester tests -s $coverageArgs
