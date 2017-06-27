@@ -22,7 +22,7 @@ require_once __DIR__ . "/../bootstrap.php";
  * @author Ales Wita
  * @license MIT
  */
-final class UploadTest extends Tester\TestCase
+final class MoveDriverTest extends Tester\TestCase
 {
 	/**
 	 * @return void
@@ -126,5 +126,5 @@ final class UploadTest extends Tester\TestCase
 }
 
 
-$test = new UploadTest;
+$test = new MoveDriverTest;
 $test->run();
