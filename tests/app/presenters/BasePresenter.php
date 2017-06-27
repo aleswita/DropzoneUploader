@@ -36,7 +36,7 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	/**
 	 * @return void
 	 */
-	public function actionOne(): void {
+	public function actionTwo(): void {
 		$this->setView("one");
 	}
 
