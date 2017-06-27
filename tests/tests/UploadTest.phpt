@@ -91,7 +91,7 @@ final class UploadTest extends Tester\TestCase
 
 
 		// check file
-		Tester\Assert::same(["name" => "upload/template.latte", "size" => 10, "accepted" => TRUE], $response->getPayload()->uploadedFiles);
+		Tester\Assert::same([["name" => "template.latte", "size" => 10, "accepted" => TRUE]], $response->getPayload()->uploadedFiles);
 	}
 
 	/**
