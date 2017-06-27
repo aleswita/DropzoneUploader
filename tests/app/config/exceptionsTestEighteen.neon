@@ -2,4 +2,4 @@ dropzoneuploader:
 	uploadDriver:
 		driver: AlesWita\DropzoneUploader\UploadDriver\Move
 	settings:
-		uploadMultiple: foo
+		addRemoveLinks: foo
