@@ -83,7 +83,7 @@ final class UploadTest extends Tester\TestCase
 		$request = new Nette\Application\Request("Base", "GET", ["action" => "one", "do" => "dropzoneUploader-uploadedFiles"]);
 		$response = $presenter->run($request);
 
-		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
+		Tester\Assert::true($response instanceof Nette\Application\Responses\JsonResponse);
 		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 
 
