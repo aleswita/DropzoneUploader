@@ -249,6 +249,5 @@ class DropzoneUploader extends Nette\Application\UI\Control
 
 		$this->presenter->payload->uploadedFiles = $this->uploadDriver->getUploadedFiles();
 		$this->presenter->sendPayload();
-		$this->presenter->terminate();
 	}
 }
