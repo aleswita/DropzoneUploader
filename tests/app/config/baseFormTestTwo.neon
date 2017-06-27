@@ -1,0 +1,4 @@
+dropzoneuploader:
+	dropzoneTemplate: ::constant(AlesWita\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE)
+	uploadDriver:
+		driver: AlesWita\DropzoneUploader\UploadDriver\Move

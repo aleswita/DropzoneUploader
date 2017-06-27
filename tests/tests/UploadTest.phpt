@@ -40,7 +40,7 @@ final class UploadTest extends Tester\TestCase
 		$presenter = $presenterFactory->createPresenter("Base");
 		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
-		$request = new Nette\Application\Request("Base", "POST", ["action" => "two"], ["_do" => "dropzoneUploader-form-submit"], ["file" => $file]);
+		$request = new Nette\Application\Request("Base", "POST", ["action" => "one"], ["_do" => "dropzoneUploader-form-submit"], ["file" => $file]);
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
@@ -80,7 +80,7 @@ final class UploadTest extends Tester\TestCase
 		$presenter = $presenterFactory->createPresenter("Base");
 		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = FALSE;
-		$request = new Nette\Application\Request("Base", "GET", ["action" => "three", "do" => "dropzoneUploader-remove", "dropzoneUploader-file" => "template.latte"]);
+		$request = new Nette\Application\Request("Base", "GET", ["action" => "one", "do" => "dropzoneUploader-remove", "dropzoneUploader-file" => "template.latte"]);
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);

@@ -21,10 +21,10 @@ class Factory
 {
 	// default template
 	const DEFAULT_TEMPLATE = [
-		"main" => __DIR__ . "/templates/default/default.latte",
-		"form" => __DIR__ . "/templates/default/default.latte",
-		"files" => __DIR__ . "/templates/default/default.latte",
-		"js" => __DIR__ . "/templates/default/default.latte",
+		"main" => __DIR__ . "/templates/default/main.latte",
+		"form" => __DIR__ . "/templates/default/form.latte",
+		"files" => __DIR__ . "/templates/default/files.latte",
+		"js" => __DIR__ . "/templates/default/js.latte",
 	];
 
 	// bootsrapt v4 template
