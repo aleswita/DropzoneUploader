@@ -31,7 +31,7 @@ final class MoveDriverTest extends Tester\TestCase
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/uploadTest.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/moveDriverTest.neon");
 
 		$container = $configurator->createContainer();
 		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
@@ -72,7 +72,7 @@ final class MoveDriverTest extends Tester\TestCase
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/uploadTest.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/moveDriverTest.neon");
 
 		$container = $configurator->createContainer();
 		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
@@ -101,7 +101,7 @@ final class MoveDriverTest extends Tester\TestCase
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/uploadTest.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/moveDriverTest.neon");
 
 		$container = $configurator->createContainer();
 		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
