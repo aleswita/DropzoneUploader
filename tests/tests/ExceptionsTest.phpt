@@ -220,19 +220,6 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parallel uploads setting must be numeric!
-	 * @return void
-	 */
-	public function testFifteen(): void {
-		$configurator = new Nette\Configurator();
-		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestFifteen.neon");
-
-		$configurator->createContainer();
-	}
-
-	/**
 	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload multiple setting must be boolean!
 	 * @return void
 	 */
