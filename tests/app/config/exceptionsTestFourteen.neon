@@ -1,0 +1,5 @@
+dropzoneuploader:
+	uploadDriver:
+		driver: AlesWita\DropzoneUploader\UploadDriver\Move
+	settings:
+		method: foo

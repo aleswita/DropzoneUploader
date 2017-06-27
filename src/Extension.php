@@ -91,11 +91,11 @@ class Extension extends Nette\DI\CompilerExtension
 				throw new DropzoneUploaderException("Upload driver must implements AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver interface!");
 			} else {
 				if (!is_array($config["uploadDriver"]["settings"])) {
-					throw new DropzoneUploaderException("Upload driver settings must be array!");
+					throw new DropzoneUploaderException("Upload driver setting must be array!");
 				} else {
 					foreach ($config["uploadDriver"]["settings"] as $key => $val) {
 						if (!in_array($key, array_keys($uploadDriver->getSettings()))) {
-							throw new DropzoneUploaderException("Unknow upload driver settings '{$key}'!");
+							throw new DropzoneUploaderException("Unknow upload driver setting '{$key}'!");
 						}
 					}
 
@@ -105,25 +105,54 @@ class Extension extends Nette\DI\CompilerExtension
 			}
 		}
 
-		// settings
+		// setting method
+		if (!in_array(Nette\Utils\Strings::upper($config["settings"]["method"]), ["POST", "GET"])) {
+			throw new DropzoneUploaderException("Method setting must be 'POST' or 'GET'!");
+		}
+
+		// setting parallelUploads
+		if (!Nette\Utils\Strings::isNumericInt($config["settings"]["parallelUploads"])) {
+			throw new DropzoneUploaderException("Parallel uploads setting must be numeric!");
+		} else {
+			$config["settings"]["parallelUploads"] = (int) $config["settings"]["parallelUploads"];
+		}
+
+		// setting uploadMultiple
+		if (!is_bool($config["settings"]["uploadMultiple"])) {
+			throw new DropzoneUploaderException("Upload multiple setting must be boolean!");
+		}
+
+		// setting maxFilesize
 		if ($config["settings"]["maxFilesize"] !== NULL) {
 			if (!is_string($config["settings"]["maxFilesize"]) && !is_integer($config["settings"]["maxFilesize"]) && !is_float($config["settings"]["maxFilesize"])) {
-				throw new DropzoneUploaderException("Maximum file size settings must be integer, float or string!");
+				throw new DropzoneUploaderException("Maximum file size setting must be integer, float or string!");
 			}
 			$config["settings"]["maxFilesize"] = $this->convertToBytes($config["settings"]["maxFilesize"]);
 
 			if ($config["settings"]["maxFilesize"] === NULL) {
-				throw new DropzoneUploaderException("Maximum file size settings is unknown!");
+				throw new DropzoneUploaderException("Maximum file size setting is unknown!");
 			}
 		}
+
+		// setting paramName
+		if (!is_string($config["settings"]["paramName"])) {
+			throw new DropzoneUploaderException("Param name setting must be string!");
+		}
+
+		// setting acceptedFiles
 		if ($config["settings"]["acceptedFiles"] !== NULL) {
 			if (!is_string($config["settings"]["acceptedFiles"]) && !is_array($config["settings"]["acceptedFiles"])) {
-				throw new DropzoneUploaderException("Accepted files settings must be string or array type!");
+				throw new DropzoneUploaderException("Accepted files setting must be string or array type!");
 			}
 
 			if (is_string($config["settings"]["acceptedFiles"])) {
 				$config["settings"]["acceptedFiles"] = (array) $config["settings"]["acceptedFiles"];
 			}
+		}
+
+		// setting addRemoveLinks
+		if (!is_bool($config["settings"]["addRemoveLinks"])) {
+			throw new DropzoneUploaderException("Add remove links setting must be boolean!");
 		}
 
 		$dropzoneUploader->addSetup("\$service->setSettings(?)", [$config["settings"]]);

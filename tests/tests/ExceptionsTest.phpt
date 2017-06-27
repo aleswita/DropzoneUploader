@@ -129,7 +129,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver settings must be array!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver setting must be array!
 	 * @return void
 	 */
 	public function testNine(): void {
@@ -142,7 +142,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Unknow upload driver settings 'foo'!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Unknow upload driver setting 'foo'!
 	 * @return void
 	 */
 	public function testTen(): void {
@@ -155,7 +155,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings must be integer, float or string!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size setting must be integer, float or string!
 	 * @return void
 	 */
 	public function testEleven(): void {
@@ -168,7 +168,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size settings is unknown!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size setting is unknown!
 	 * @return void
 	 */
 	public function testTwelve(): void {
@@ -181,7 +181,7 @@ final class ExceptionsTest extends Tester\TestCase
 	}
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Accepted files settings must be string or array type!
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Accepted files setting must be string or array type!
 	 * @return void
 	 */
 	public function testThirteen(): void {
@@ -189,6 +189,84 @@ final class ExceptionsTest extends Tester\TestCase
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
 		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestThirteen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Method setting must be 'POST' or 'GET'!
+	 * @return void
+	 */
+	public function testFourteen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestFourteen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parallel uploads setting must be numeric!
+	 * @return void
+	 */
+	public function testFifteen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestFifteen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parallel uploads setting must be numeric!
+	 * @return void
+	 */
+	public function testFifteen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestFifteen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload multiple setting must be boolean!
+	 * @return void
+	 */
+	public function testSixteen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestSixteen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Param name setting must be string!
+	 * @return void
+	 */
+	public function testSeventeen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestSeventeen.neon");
+
+		$configurator->createContainer();
+	}
+
+	/**
+	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Add remove links setting must be boolean!
+	 * @return void
+	 */
+	public function testEighteen(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/exceptionsTestEighteen.neon");
 
 		$configurator->createContainer();
 	}
