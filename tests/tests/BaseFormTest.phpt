@@ -109,7 +109,7 @@ final class BaseFormTest extends Tester\TestCase
 		$data = $dom->find("form");
 
 		Tester\Assert::count(1, $data);
-		Tester\Assert::same("/base/one", (string) $data[0]["action"]);
+		Tester\Assert::same("/base/two", (string) $data[0]["action"]);
 		Tester\Assert::same("post", (string) $data[0]["method"]);
 		Tester\Assert::same("dropzone", (string) $data[0]["class"]);
 		Tester\Assert::same("dropzoneForm", (string) $data[0]["id"]);
@@ -221,7 +221,7 @@ final class BaseFormTest extends Tester\TestCase
 		$data = $dom->find("form");
 
 		Tester\Assert::count(1, $data);
-		Tester\Assert::same("/base/one", (string) $data[0]["action"]);
+		Tester\Assert::same("/base/two", (string) $data[0]["action"]);
 		Tester\Assert::same("post", (string) $data[0]["method"]);
 		Tester\Assert::same("dropzone", (string) $data[0]["class"]);
 		Tester\Assert::same("dropzoneForm", (string) $data[0]["id"]);
