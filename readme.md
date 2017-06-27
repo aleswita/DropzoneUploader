@@ -4,9 +4,6 @@ Dropzone Uploader for [Nette Framework](https://nette.org) and [DropzoneJs](http
 [![Build Status](https://travis-ci.org/aleswita/DropzoneUploader.svg?branch=master)](https://travis-ci.org/aleswita/DropzoneUploader)
 [![Coverage Status](https://coveralls.io/repos/github/aleswita/DropzoneUploader/badge.svg?branch=master)](https://coveralls.io/github/aleswita/DropzoneUploader?branch=master)
 
-#### TODO
-Vytvořeno pro vlastní potřebu, proto je hotov pouze FTP upload driver, pokud bude zájem o použití s jiným typem uploadu, založte issue nebo pošlete pull request.
-
 ## Installation
 The best way to install AlesWita/WebLoader is using [Composer](http://getcomposer.org/):
 ```sh
@@ -35,7 +32,7 @@ dropzoneuploader:
 			- application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 		addRemoveLinks: TRUE
 	messages:
-		dictDefaultMessage: "dropzone.dictDefaultMessage"
+		dictDefaultMessage: "Drag & drop files!"
 ```
 
 #### Presenter
