@@ -31,7 +31,6 @@ class Extension extends Nette\DI\CompilerExtension
 			"uploadMultiple" => FALSE,
 			"maxFilesize" => NULL,
 			"paramName" => "file",
-			"maxFiles" => NULL,
 			"acceptedFiles" => NULL,
 			"addRemoveLinks" => FALSE,
 		],
