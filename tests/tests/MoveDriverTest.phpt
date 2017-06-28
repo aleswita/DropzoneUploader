@@ -123,6 +123,47 @@ final class MoveDriverTest extends Tester\TestCase
 		// check file
 		Tester\Assert::false(is_file("{$service->getUploadDriver()->getSettings()["dir"]}/template.latte"));
 	}
+	
+	/**
+	 * @return void
+	 */
+	public function testFour(): void {
+		$configurator = new Nette\Configurator();
+		$configurator->setTempDirectory(TEMP_DIR);
+		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . "/../app/config/moveDriverTest.neon");
+
+		$container = $configurator->createContainer();
+		$presenterFactory = $container->getByType("Nette\\Application\\IPresenterFactory");
+		$file = new Nette\Http\FileUpload(["name" => "template.latte", "type" => "", "size" => 10, "tmp_name" => __DIR__ . "/../files/template.latte", "error" => 0]);
+
+		$presenter = $presenterFactory->createPresenter("Base");
+		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
+		$presenter->autoCanonicalize = FALSE;
+		$request = new Nette\Application\Request("Base", "POST", ["action" => "one"], ["_do" => "dropzoneUploader-form-submit"], ["file" => $file]);
+		$response = $presenter->run($request);
+
+		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+
+
+		// check service
+		$service = $presenter["dropzoneUploader"];
+
+		//Tester\Assert::same("upload", $service->getUploadDriver()->getSettings()["dir"]);
+
+
+		// check form
+		//$form = $presenter["dropzoneUploader"]["form"];
+
+		//Tester\Assert::count(0, $form->getErrors());
+		//Tester\Assert::true($form->isSuccess());
+		//Tester\Assert::same($file, $form->getHttpData()["file"]);
+
+
+		// check file
+		//Tester\Assert::true(is_file("{$service->getUploadDriver()->getSettings()["dir"]}/template.latte"));
+	}
 }
 
 
