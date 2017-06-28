@@ -233,10 +233,12 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	 * @return void
 	 */
 	public function handleRemove(string $folder = NULL, string $file = NULL): void {
-		$this->uploadDriver->setFolder($folder);
+		if ($this->settings["addRemoveLinks"]) {
+			$this->uploadDriver->setFolder($folder);
 
-		if ($file !== NULL) {
-			$this->uploadDriver->remove($file);
+			if ($file !== NULL) {
+				$this->uploadDriver->remove($file);
+			}
 		}
 	}
 
