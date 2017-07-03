@@ -77,8 +77,8 @@ if (previewNode) {
     var a = file.previewElement.querySelector("[data-dz-name]");
     var link = {link download!};
     var params = {
-       {$fileParam}: file.name,
-       {$folderParam}: folder,
+     {$fileParam}: file.name,
+     {$folderParam}: folder,
     };
 
     a.href = link + "&" + $.param(params);
