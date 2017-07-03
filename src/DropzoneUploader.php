@@ -232,6 +232,19 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	 * @param string
 	 * @return void
 	 */
+	public function handleDownload(string $folder = NULL, string $file = NULL): void {
+		$this->uploadDriver->setFolder($folder);
+
+		if ($file !== NULL) {
+			$this->presenter->sendResponse(new Nette\Application\Responses\CallbackResponse($this->uploadDriver->download($file)));
+		}
+	}
+
+	/**
+	 * @param string
+	 * @param string
+	 * @return void
+	 */
 	public function handleRemove(string $folder = NULL, string $file = NULL): void {
 		if ($this->settings["addRemoveLinks"]) {
 			$this->uploadDriver->setFolder($folder);

@@ -76,6 +76,15 @@ if (previewNode) {
    {* success *}
    this.on("success", function(file, response) {
     file.previewElement.classList.add("alert-success");
+
+	var a = file.previewElement.querySelector("[data-dz-name]");
+	var link = {link download!};
+	var params = {
+       {$fileParam}: file.name,
+       {$folderParam}: folder,
+	};
+
+	a.href = link + "&" + $.param(params);
    });
 
    {* canceled *}

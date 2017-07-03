@@ -72,6 +72,17 @@ final class Move extends UploadDriver
 	}
 
 	/**
+	 * @todo not implemented
+	 * @param string
+	 * @return callable
+	 */
+	public function download(string $file): callable {
+		return function ($httpRequest, $httpResponse) use ($file): void {
+			// todo
+		};
+	}
+
+	/**
 	 * @param string
 	 * @return bool
 	 */

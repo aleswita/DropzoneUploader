@@ -54,6 +54,12 @@ interface IUploadDriver
 
 	/**
 	 * @param string
+	 * @return callable
+	 */
+	function download(string $file): callable;
+
+	/**
+	 * @param string
 	 * @return bool
 	 */
 	function remove(string $file): bool;

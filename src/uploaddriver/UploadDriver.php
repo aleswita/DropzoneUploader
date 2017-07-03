@@ -78,7 +78,12 @@ abstract class UploadDriver implements IUploadDriver
 
 	/**
 	 * @param string
-	 * @param bool
+	 * @return callable
+	 */
+	abstract function download(string $file): callable;
+
+	/**
+	 * @param string
 	 * @return bool
 	 */
 	abstract function remove(string $file): bool;

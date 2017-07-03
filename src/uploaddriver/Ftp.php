@@ -72,12 +72,12 @@ final class Ftp extends UploadDriver
 		if ($parent === TRUE) {
 			try {
 				$ftp = $this->getFtpConnection();
+				$fileName = ($this->folder === NULL ? $file->getName() : "{$this->folder}/{$file->getName()}");
 
 				if ($ftp->nList($this->folder) === FALSE) {
 					$ftp->mkdir($this->folder);
 				}
 
-				$fileName = ($this->folder === NULL ? $file->getName() : "{$this->folder}/{$file->getName()}");
 				return $ftp->put($fileName, $file->getTemporaryFile(), FTP_BINARY);
 			} catch (\FtpException $e) {
 			}
@@ -88,13 +88,32 @@ final class Ftp extends UploadDriver
 
 	/**
 	 * @param string
+	 * @return callable
+	 */
+	public function download(string $file): callable {
+		return function ($httpRequest, $httpResponse) use ($file): void {
+			try {
+				$ftp = $this->getFtpConnection();
+				$fileName = ($this->folder === NULL ? $file : "{$this->folder}/{$file}");
+
+				$httpResponse->setHeader("Content-Disposition", "attachment; filename=\"{$file}\"; filename*=utf-8''" . rawurlencode($file));
+				$httpResponse->setHeader("Content-Length", $ftp->size($file));
+
+				$ftp->get("php://output", $file, FTP_BINARY);
+			} catch (\FtpException $e) {
+			}
+		};
+	}
+
+	/**
+	 * @param string
 	 * @return bool
 	 */
 	public function remove(string $file): bool {
 		try {
 			$ftp = $this->getFtpConnection();
-
 			$fileName = ($this->folder === NULL ? $file : "{$this->folder}/{$file}");
+
 			$return = $ftp->delete($fileName);
 
 			if (count($ftp->nList(dirname($fileName))) === 0) {
