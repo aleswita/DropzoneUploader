@@ -81,7 +81,7 @@ final class Move extends UploadDriver
 	public function download(string $file): callable {
 		return function ($httpRequest, $httpResponse) use ($file): void {
 			$fileResponse = new Nette\Application\Responses\FileResponse(($this->folder === NULL ? $file : "{$this->folder}/{$file}"));
-            $fileResponse->send($httpRequest, $httpResponse);
+			$fileResponse->send($httpRequest, $httpResponse);
 		};
 	}
 
