@@ -113,6 +113,14 @@ final class MoveDriverTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\CallbackResponse);
+
+
+		// check service
+		$service = $presenter["dropzoneUploader"];
+
+
+		// check file
+		Tester\Assert::true(is_file("./template.latte"));
 	}
 
 	/**
