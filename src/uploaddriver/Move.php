@@ -41,12 +41,15 @@ final class Move extends UploadDriver
 		$uploadedFiles = [];
 		$path = ($this->folder === NULL ? $this->settings["dir"] : "{$this->settings["dir"]}/{$this->folder}");
 
-		foreach (Nette\Utils\Finder::findFiles("*")->from($path) as $file) {
-			$uploadedFiles[] = [
-				"name" => $file->getBasename(),
-				"size" => $file->getSize(),
-				"accepted" => TRUE,
-			];
+		try {
+			foreach (Nette\Utils\Finder::findFiles("*")->from($path) as $file) {
+				$uploadedFiles[] = [
+					"name" => $file->getBasename(),
+					"size" => $file->getSize(),
+					"accepted" => TRUE,
+				];
+			}
+		} catch (\UnexpectedValueException $e) {
 		}
 
 		return $uploadedFiles;
@@ -72,13 +75,13 @@ final class Move extends UploadDriver
 	}
 
 	/**
-	 * @todo not implemented
 	 * @param string
 	 * @return callable
 	 */
 	public function download(string $file): callable {
 		return function ($httpRequest, $httpResponse) use ($file): void {
-			// todo
+			$fileResponse = new Nette\Application\Responses\FileResponse(($this->folder === NULL ? $file : "{$this->folder}/{$file}"));
+            $fileResponse->send($httpRequest, $httpResponse);
 		};
 	}
 

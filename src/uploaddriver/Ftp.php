@@ -96,10 +96,11 @@ final class Ftp extends UploadDriver
 				$ftp = $this->getFtpConnection();
 				$fileName = ($this->folder === NULL ? $file : "{$this->folder}/{$file}");
 
+				// $httpResponse->setContentType("application/octet-stream");
 				$httpResponse->setHeader("Content-Disposition", "attachment; filename=\"{$file}\"; filename*=utf-8''" . rawurlencode($file));
-				$httpResponse->setHeader("Content-Length", $ftp->size($file));
+				$httpResponse->setHeader("Content-Length", $ftp->size($fileName));
 
-				$ftp->get("php://output", $file, FTP_BINARY);
+				$ftp->get("php://output", $fileName, FTP_BINARY);
 			} catch (\FtpException $e) {
 			}
 		};
