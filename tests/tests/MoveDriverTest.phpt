@@ -120,7 +120,7 @@ final class MoveDriverTest extends Tester\TestCase
 
 
 		// check file
-		Tester\Assert::true(is_file("./template.latte"));
+		Tester\Assert::true(is_file("template.latte"));
 	}
 
 	/**
