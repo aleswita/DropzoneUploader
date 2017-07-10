@@ -113,7 +113,6 @@ final class MoveDriverTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\CallbackResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
 	}
 
 	/**
