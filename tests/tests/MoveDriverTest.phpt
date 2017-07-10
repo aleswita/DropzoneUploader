@@ -117,10 +117,6 @@ final class MoveDriverTest extends Tester\TestCase
 
 		// check service
 		$service = $presenter["dropzoneUploader"];
-
-
-		// check file
-		Tester\Assert::true(is_file("template.latte"));
 	}
 
 	/**
