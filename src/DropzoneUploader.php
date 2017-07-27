@@ -197,7 +197,6 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	public function render(): void
 	{
 		$this->prepareTemplate();
-
 		$this->template->setFile($this->dropzoneTemplate['main']);
 		$this->template->render();
 	}
@@ -209,7 +208,6 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	public function renderForm(): void
 	{
 		$this->prepareTemplate();
-
 		$this->template->setFile($this->dropzoneTemplate['form']);
 		$this->template->render();
 	}
@@ -220,7 +218,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	 */
 	public function renderFiles(): void
 	{
-		//$this->prepareTemplate();
+		$this->prepareTemplate();
 		$this->template->setFile($this->dropzoneTemplate['files']);
 		$this->template->render();
 	}
@@ -231,7 +229,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	 */
 	public function renderJs(): void
 	{
-		//$this->prepareTemplate();
+		$this->prepareTemplate();
 		$this->template->setFile($this->dropzoneTemplate['js']);
 		$this->template->render();
 	}
