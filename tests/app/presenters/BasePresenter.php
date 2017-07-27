@@ -22,28 +22,34 @@ final class BasePresenter extends Nette\Application\UI\Presenter
 	/** @var AlesWita\DropzoneUploader\Factory @inject */
 	public $dropzoneUploader;
 
+
 	/**
 	 * @return void
 	 */
-	public function actionOne(): void {
-		$this["dropzoneUploader"]->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
-			$uploader->setFolder("foo");
+	public function actionOne(): void
+	{
+		$this['dropzoneUploader']->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
+			$uploader->setFolder('foo');
 		};
 
-		$this->setView("default");
+		$this->setView('default');
 	}
+
 
 	/**
 	 * @return void
 	 */
-	public function actionTwo(): void {
-		$this->setView("one");
+	public function actionTwo(): void
+	{
+		$this->setView('one');
 	}
+
 
 	/**
 	 * @return AlesWita\DropzoneUploader\DropzoneUploader
 	 */
-	protected function createComponentDropzoneUploader(): AlesWita\DropzoneUploader\DropzoneUploader {
+	protected function createComponentDropzoneUploader(): AlesWita\DropzoneUploader\DropzoneUploader
+	{
 		return $this->dropzoneUploader->getDropzoneUploader();
 	}
 }

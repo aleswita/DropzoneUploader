@@ -20,165 +20,170 @@ class Extension extends Nette\DI\CompilerExtension
 {
 	/** @var array */
 	public $defaults = [
-		"dropzoneTemplate" => NULL,
-		"uploadDriver" => [
-			"driver" => NULL,
-			"settings" => [],
+		'dropzoneTemplate' => null,
+		'uploadDriver' => [
+			'driver' => null,
+			'settings' => [],
 		],
-		"settings" => [
-			"method" => "POST",
-			"parallelUploads" => 1,
-			"uploadMultiple" => FALSE,
-			"maxFilesize" => NULL,
-			"paramName" => "file",
-			"acceptedFiles" => NULL,
-			"addRemoveLinks" => FALSE,
+		'settings' => [
+			'method' => 'POST',
+			'parallelUploads' => 1,
+			'uploadMultiple' => false,
+			'maxFilesize' => null,
+			'paramName' => 'file',
+			'acceptedFiles' => null,
+			'addRemoveLinks' => false,
 		],
-		"messages" => [
-			"dictDefaultMessage" => "Drop files here to upload",
-			"dictFallbackMessage" => "Your browser does not support drag'n'drop file uploads.",
-			"dictFallbackText" => "Please use the fallback form below to upload your files like in the olden days.",
-			"dictFileTooBig" => "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
-			"dictInvalidFileType" => "You can't upload files of this type.",
-			"dictResponseError" => "Server responded with {{statusCode}} code.",
-			"dictCancelUpload" => "Cancel upload",
-			"dictCancelUploadConfirmation" => "Are you sure you want to cancel this upload?",
-			"dictRemoveFile" => "Remove file",
-			"dictRemoveFileConfirmation" => NULL,
-			"dictMaxFilesExceeded" => "You can not upload any more files.",
+		'messages' => [
+			'dictDefaultMessage' => 'Drop files here to upload',
+			'dictFallbackMessage' => 'Your browser does not support drag\'n\'drop file uploads.',
+			'dictFallbackText' => 'Please use the fallback form below to upload your files like in the olden days.',
+			'dictFileTooBig' => 'File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.',
+			'dictInvalidFileType' => 'You can\'t upload files of this type.',
+			'dictResponseError' => 'Server responded with {{statusCode}} code.',
+			'dictCancelUpload' => 'Cancel upload',
+			'dictCancelUploadConfirmation' => 'Are you sure you want to cancel this upload?',
+			'dictRemoveFile' => 'Remove file',
+			'dictRemoveFileConfirmation' => null,
+			'dictMaxFilesExceeded' => 'You can not upload any more files.',
 		],
 	];
+
 
 	/**
 	 * @return void
 	 */
-	public function loadConfiguration(): void {
+	public function loadConfiguration(): void
+	{
 		$config = $this->getConfig($this->defaults);
 		$container = $this->getContainerBuilder();
 
-		$dropzoneUploader = $container->addDefinition($this->prefix("dropzoneuploader"))
-			->setClass("AlesWita\\DropzoneUploader\\Factory");
+		$dropzoneUploader = $container->addDefinition($this->prefix('dropzoneuploader'))
+			->setClass('AlesWita\\DropzoneUploader\\Factory');
 
-		if ($config["dropzoneTemplate"] !== NULL) {
-			if ($config["dropzoneTemplate"] instanceof Nette\DI\Statement) {
-				$config["dropzoneTemplate"] = constant($config["dropzoneTemplate"]->arguments[0]);
+		if ($config['dropzoneTemplate'] !== null) {
+			if ($config['dropzoneTemplate'] instanceof Nette\DI\Statement) {
+				$config['dropzoneTemplate'] = constant($config['dropzoneTemplate']->arguments[0]);
 			}
 
-			if (!is_array($config["dropzoneTemplate"]) || !isset($config["dropzoneTemplate"]["main"]) || !isset($config["dropzoneTemplate"]["form"]) || !isset($config["dropzoneTemplate"]["files"]) || !isset($config["dropzoneTemplate"]["js"])) {
-				throw new DropzoneUploaderException("Parameter 'dropzoneTemplate' must be array with keys 'main', 'form', 'files' and 'js'!");
-			} elseif (!is_file($config["dropzoneTemplate"]["main"])) {
-				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["main"]}'!");
-			} elseif (!is_file($config["dropzoneTemplate"]["form"])) {
-				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["form"]}'!");
-			} elseif (!is_file($config["dropzoneTemplate"]["files"])) {
-				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["files"]}'!");
-			} elseif (!is_file($config["dropzoneTemplate"]["js"])) {
-				throw new DropzoneUploaderException("Can not find template '{$config["dropzoneTemplate"]["js"]}'!");
+			if (!is_array($config['dropzoneTemplate']) || !isset($config['dropzoneTemplate']['main']) || !isset($config['dropzoneTemplate']['form']) || !isset($config['dropzoneTemplate']['files']) || !isset($config['dropzoneTemplate']['js'])) {
+				throw new DropzoneUploaderException('Parameter "dropzoneTemplate" must be array with keys "main", "form", "files" and "js"!');
+			} elseif (!is_file($config['dropzoneTemplate']['main'])) {
+				throw new DropzoneUploaderException('Can not find template "' . $config['dropzoneTemplate']['main'] . '"!');
+			} elseif (!is_file($config['dropzoneTemplate']['form'])) {
+				throw new DropzoneUploaderException('Can not find template "' . $config['dropzoneTemplate']['form'] . '"!');
+			} elseif (!is_file($config['dropzoneTemplate']['files'])) {
+				throw new DropzoneUploaderException('Can not find template "' . $config['dropzoneTemplate']['files'] . '"!');
+			} elseif (!is_file($config['dropzoneTemplate']['js'])) {
+				throw new DropzoneUploaderException('Can not find template "' . $config['dropzoneTemplate']['js'] . '"!');
 			} else {
-				$dropzoneUploader->addSetup("\$service->setDropzoneTemplate(?)", [$config["dropzoneTemplate"]]);
+				$dropzoneUploader->addSetup('$service->setDropzoneTemplate(?)', [$config['dropzoneTemplate']]);
 			}
 		}
 
 		// upload driver
-		if ($config["uploadDriver"]["driver"] === NULL) {
-			throw new DropzoneUploaderException("Upload driver must be set!");
-		} elseif (!class_exists($config["uploadDriver"]["driver"])) {
-			throw new DropzoneUploaderException("Upload driver '{$config["uploadDriver"]["driver"]}' no exists!");
+		if ($config['uploadDriver']['driver'] === null) {
+			throw new DropzoneUploaderException('Upload driver must be set!');
+		} elseif (!class_exists($config['uploadDriver']['driver'])) {
+			throw new DropzoneUploaderException('Upload driver "' . $config['uploadDriver']['driver'] . '" no exists!');
 		} else {
-			$uploadDriver = new $config["uploadDriver"]["driver"];
+			$uploadDriver = new $config['uploadDriver']['driver'];
 
-			if (!array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($uploadDriver))) {
-				throw new DropzoneUploaderException("Upload driver must implements AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver interface!");
+			if (!array_key_exists('AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver', class_implements($uploadDriver))) {
+				throw new DropzoneUploaderException('Upload driver must implements AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver interface!');
 			} else {
-				if (!is_array($config["uploadDriver"]["settings"])) {
-					throw new DropzoneUploaderException("Upload driver setting must be array!");
+				if (!is_array($config['uploadDriver']['settings'])) {
+					throw new DropzoneUploaderException('Upload driver setting must be array!');
 				} else {
-					foreach ($config["uploadDriver"]["settings"] as $key => $val) {
-						if (!in_array($key, array_keys($uploadDriver->getSettings()))) {
-							throw new DropzoneUploaderException("Unknow upload driver setting '{$key}'!");
+					foreach ($config['uploadDriver']['settings'] as $key => $val) {
+						if (!in_array($key, array_keys($uploadDriver->getSettings()), true)) {
+							throw new DropzoneUploaderException('Unknow upload driver setting "' . $key . '"!');
 						}
 					}
 
-					$uploadDriver->setSettings($config["uploadDriver"]["settings"]);
-					$dropzoneUploader->addSetup("\$service->setUploadDriver(?)", [$uploadDriver]);
+					$uploadDriver->setSettings($config['uploadDriver']['settings']);
+					$dropzoneUploader->addSetup('$service->setUploadDriver(?)', [$uploadDriver]);
 				}
 			}
 		}
 
 		// setting method
-		if (!in_array(Nette\Utils\Strings::upper($config["settings"]["method"]), ["POST", "GET"])) {
-			throw new DropzoneUploaderException("Method setting must be 'POST' or 'GET'!");
+		if (!in_array(Nette\Utils\Strings::upper($config['settings']['method']), ['POST', 'GET'], true)) {
+			throw new DropzoneUploaderException('Method setting must be "POST" or "GET"!');
 		}
 
 		// setting parallelUploads
-		if (!Nette\Utils\Validators::isNumericInt($config["settings"]["parallelUploads"])) {
-			throw new DropzoneUploaderException("Parallel uploads setting must be numeric!");
+		if (!Nette\Utils\Validators::isNumericInt($config['settings']['parallelUploads'])) {
+			throw new DropzoneUploaderException('Parallel uploads setting must be numeric!');
 		} else {
-			$config["settings"]["parallelUploads"] = (int) $config["settings"]["parallelUploads"];
+			$config['settings']['parallelUploads'] = (int) $config['settings']['parallelUploads'];
 		}
 
 		// setting uploadMultiple
-		if (!is_bool($config["settings"]["uploadMultiple"])) {
-			throw new DropzoneUploaderException("Upload multiple setting must be boolean!");
+		if (!is_bool($config['settings']['uploadMultiple'])) {
+			throw new DropzoneUploaderException('Upload multiple setting must be boolean!');
 		}
 
 		// setting maxFilesize
-		if ($config["settings"]["maxFilesize"] !== NULL) {
-			if (!is_string($config["settings"]["maxFilesize"]) && !is_integer($config["settings"]["maxFilesize"]) && !is_float($config["settings"]["maxFilesize"])) {
-				throw new DropzoneUploaderException("Maximum file size setting must be integer, float or string!");
+		if ($config['settings']['maxFilesize'] !== null) {
+			if (!is_string($config['settings']['maxFilesize']) && !is_integer($config['settings']['maxFilesize']) && !is_float($config['settings']['maxFilesize'])) {
+				throw new DropzoneUploaderException('Maximum file size setting must be integer, float or string!');
 			}
-			$config["settings"]["maxFilesize"] = $this->convertToBytes($config["settings"]["maxFilesize"]);
+			$config['settings']['maxFilesize'] = $this->convertToBytes($config['settings']['maxFilesize']);
 
-			if ($config["settings"]["maxFilesize"] === NULL) {
-				throw new DropzoneUploaderException("Maximum file size setting is unknown!");
+			if ($config['settings']['maxFilesize'] === null) {
+				throw new DropzoneUploaderException('Maximum file size setting is unknown!');
 			}
 		}
 
 		// setting paramName
-		if (!is_string($config["settings"]["paramName"])) {
-			throw new DropzoneUploaderException("Param name setting must be string!");
+		if (!is_string($config['settings']['paramName'])) {
+			throw new DropzoneUploaderException('Param name setting must be string!');
 		}
 
 		// setting acceptedFiles
-		if ($config["settings"]["acceptedFiles"] !== NULL) {
-			if (!is_string($config["settings"]["acceptedFiles"]) && !is_array($config["settings"]["acceptedFiles"])) {
-				throw new DropzoneUploaderException("Accepted files setting must be string or array type!");
+		if ($config['settings']['acceptedFiles'] !== null) {
+			if (!is_string($config['settings']['acceptedFiles']) && !is_array($config['settings']['acceptedFiles'])) {
+				throw new DropzoneUploaderException('Accepted files setting must be string or array type!');
 			}
 
-			if (is_string($config["settings"]["acceptedFiles"])) {
-				$config["settings"]["acceptedFiles"] = (array) $config["settings"]["acceptedFiles"];
+			if (is_string($config['settings']['acceptedFiles'])) {
+				$config['settings']['acceptedFiles'] = (array) $config['settings']['acceptedFiles'];
 			}
 		}
 
 		// setting addRemoveLinks
-		if (!is_bool($config["settings"]["addRemoveLinks"])) {
-			throw new DropzoneUploaderException("Add remove links setting must be boolean!");
+		if (!is_bool($config['settings']['addRemoveLinks'])) {
+			throw new DropzoneUploaderException('Add remove links setting must be boolean!');
 		}
 
-		$dropzoneUploader->addSetup("\$service->setSettings(?)", [$config["settings"]]);
+		$dropzoneUploader->addSetup('$service->setSettings(?)', [$config['settings']]);
 
 		// messages
-		if ($config["messages"]["dictRemoveFileConfirmation"] === NULL) {// this is function of dropzone.js: http://www.dropzonejs.com/#config-dictRemoveFileConfirmation
-			unset($config["messages"]["dictRemoveFileConfirmation"]);
+		if ($config['messages']['dictRemoveFileConfirmation'] === null) {// this is function of dropzone.js: http://www.dropzonejs.com/#config-dictRemoveFileConfirmation
+			unset($config['messages']['dictRemoveFileConfirmation']);
 		}
 
-		$dropzoneUploader->addSetup("\$service->setMessages(?)", [$config["messages"]]);
+		$dropzoneUploader->addSetup('$service->setMessages(?)', [$config['messages']]);
 	}
+
 
 	/**
 	 * @return void
 	 */
-	public function beforeCompile(): void {
+	public function beforeCompile(): void
+	{
 		$config = $this->getConfig($this->defaults);
 		$container = $this->getContainerBuilder();
 
-		$dropzoneUploader = $container->getDefinitionByType("AlesWita\\DropzoneUploader\\Factory");
-		$dropzoneUploader->addSetup("\$service->setTranslator(?)", ["@" . $container->getByType("Nette\\Localization\\ITranslator")]);
+		$dropzoneUploader = $container->getDefinitionByType('AlesWita\\DropzoneUploader\\Factory');
+		$dropzoneUploader->addSetup('\$service->setTranslator(?)', ['@' . $container->getByType('Nette\\Localization\\ITranslator')]);
 	}
+
 
 	/**
 	 * @param string|int
-	 * @return int|float|NULL
+	 * @return int|float|null
 	 */
 	private function convertToBytes($from)
 	{
@@ -195,16 +200,16 @@ class Extension extends Nette\DI\CompilerExtension
 			}
 
 			switch ($unit) {
-				case "kb":
+				case 'kb':
 					return $num * 1024;
-				case "mb":
+				case 'mb':
 					return $num * pow(1024, 2);
-				case "gb":
+				case 'gb':
 					return $num * pow(1024, 3);
-				case "tb":
+				case 'tb':
 					return $num * pow(1024, 4);
 				default:
-					return NULL;
+					return null;
 			}
 		}
 	}

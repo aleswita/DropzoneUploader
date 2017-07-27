@@ -25,66 +25,80 @@ abstract class UploadDriver implements IUploadDriver
 	/** @var string */
 	protected $folder;
 
+
 	/**
 	 * @param array
 	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
+	public function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
+	{
 		$this->settings = array_replace($this->settings, $settings);
 		return $this;
 	}
 
+
 	/**
-	 * @param string|NULL
+	 * @param string|null
 	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function setFolder(?string $folder): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
-		if ($folder !== NULL) {
-			$this->folder = Nette\Utils\Strings::trim($folder, "\\/");
+	public function setFolder(?string $folder): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
+	{
+		if ($folder !== null) {
+			$this->folder = Nette\Utils\Strings::trim($folder, '\\/');
 		}
+
 		return $this;
 	}
 
+
 	/**
 	 * @return array
 	 */
-	public function getSettings(): array {
+	public function getSettings(): array
+	{
 		return $this->settings;
 	}
 
+
 	/**
-	 * @return string|NULL
+	 * @return string|null
 	 */
-	public function getFolder(): ?string {
+	public function getFolder(): ?string
+	{
 		return $this->folder;
 	}
+
 
 	/**
 	 * @return array
 	 */
-	abstract function getUploadedFiles(): array;
+	abstract public function getUploadedFiles(): array;
+
 
 	/**
 	 * @param Nette\Http\FileUpload
 	 * @return bool
 	 */
-	public function upload(Nette\Http\FileUpload $file): bool {
+	public function upload(Nette\Http\FileUpload $file): bool
+	{
 		if (!$file->isOk()) {
-			return FALSE;
+			return false;
 		}
 
-		return TRUE;
+		return true;
 	}
+
 
 	/**
 	 * @param string
 	 * @return callable
 	 */
-	abstract function download(string $file): callable;
+	abstract public function download(string $file): callable;
+
 
 	/**
 	 * @param string
 	 * @return bool
 	 */
-	abstract function remove(string $file): bool;
+	abstract public function remove(string $file): bool;
 }

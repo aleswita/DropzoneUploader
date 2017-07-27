@@ -21,32 +21,36 @@ final class Move extends UploadDriver
 {
 	/** @var array */
 	protected $settings = [
-		"dir" => NULL,
+		'dir' => null,
 	];
+
 
 	/**
 	 * @param array
 	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
-	public function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver {
-		$settings["dir"] = (isset($settings["dir"]) ? Nette\Utils\Strings::trim($settings["dir"], "\\/") : NULL);
+	public function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
+	{
+		$settings['dir'] = (isset($settings['dir']) ? Nette\Utils\Strings::trim($settings['dir'], '\\/') : null);
 		parent::setSettings($settings);
 		return $this;
 	}
 
+
 	/**
 	 * @return array
 	 */
-	public function getUploadedFiles(): array {
+	public function getUploadedFiles(): array
+	{
 		$uploadedFiles = [];
-		$path = ($this->folder === NULL ? $this->settings["dir"] : "{$this->settings["dir"]}/{$this->folder}");
+		$path = ($this->folder === null ? $this->settings['dir'] : $this->settings['dir'] . '/' . $this->folder);
 
 		try {
-			foreach (Nette\Utils\Finder::findFiles("*")->from($path) as $file) {
+			foreach (Nette\Utils\Finder::findFiles('*')->from($path) as $file) {
 				$uploadedFiles[] = [
-					"name" => $file->getBasename(),
-					"size" => $file->getSize(),
-					"accepted" => TRUE,
+					'name' => $file->getBasename(),
+					'size' => $file->getSize(),
+					'accepted' => true,
 				];
 			}
 		} catch (\UnexpectedValueException $e) {
@@ -55,48 +59,54 @@ final class Move extends UploadDriver
 		return $uploadedFiles;
 	}
 
+
 	/**
 	 * @param Nette\Http\FileUpload
 	 * @return bool
 	 */
-	public function upload(Nette\Http\FileUpload $file): bool {
+	public function upload(Nette\Http\FileUpload $file): bool
+	{
 		$parent = parent::upload($file);
 
-		if ($parent === TRUE) {
+		if ($parent === true) {
 			try {
-				$dest = ($this->folder === NULL ? "{$this->settings["dir"]}/{$file->getName()}" : "{$this->settings["dir"]}/{$this->folder}/{$file->getName()}");
+				$dest = $this->folder === null ? $this->settings['dir'] . '/' . $file->getName() : $this->settings['dir'] . '/' . $this->folder . '/' . $file->getName();
 				$file->move($dest);
-				return TRUE;
+				return true;
 			} catch (Nette\InvalidStateException $e) {
 			}
 		}
 
-		return FALSE;
+		return false;
 	}
+
 
 	/**
 	 * @param string
 	 * @return callable
 	 */
-	public function download(string $file): callable {
+	public function download(string $file): callable
+	{
 		return function ($httpRequest, $httpResponse) use ($file): void {
-			$fileResponse = new Nette\Application\Responses\FileResponse(($this->folder === NULL ? $file : "{$this->folder}/{$file}"));
+			$fileResponse = new Nette\Application\Responses\FileResponse(($this->folder === null ? $file : $this->folder . '/' . $file));
 			$fileResponse->send($httpRequest, $httpResponse);
 		};
 	}
+
 
 	/**
 	 * @param string
 	 * @return bool
 	 */
-	public function remove(string $file): bool {
+	public function remove(string $file): bool
+	{
 		try {
-			$path = ($this->folder === NULL ? "{$this->settings["dir"]}/{$file}" : "{$this->settings["dir"]}/{$this->folder}/{$file}");
+			$path = ($this->folder === null ? $this->settings['dir'] . '/' . $file : $this->settings['dir'] . '/' . $this->folder . '/' . $file);
 			Nette\Utils\FileSystem::delete($path);
-			return TRUE;
+			return true;
 		} catch (Nette\IOException $e) {
 		}
 
-		return FALSE;
+		return false;
 	}
 }

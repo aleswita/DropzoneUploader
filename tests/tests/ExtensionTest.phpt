@@ -15,7 +15,7 @@ use AlesWita;
 use Nette;
 use Tester;
 
-require_once __DIR__ . "/../bootstrap.php";
+require_once __DIR__ . '/../bootstrap.php';
 
 
 /**
@@ -30,7 +30,7 @@ final class ExtensionTest extends Tester\TestCase
 	public function testOne(): void {
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
 		$configurator->addConfig(__DIR__ . "/../app/config/extensionTestOne.neon");
 
 		$container = $configurator->createContainer();

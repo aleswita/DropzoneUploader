@@ -26,7 +26,7 @@ interface IUploadDriver
 	function setSettings(array $settings): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver;
 
 	/**
-	 * @param string|NULL
+	 * @param string|null
 	 * @return AlesWita\DropzoneUploader\UploadDriver\IUploadDriver
 	 */
 	function setFolder(?string $folder): AlesWita\DropzoneUploader\UploadDriver\IUploadDriver;
@@ -37,7 +37,7 @@ interface IUploadDriver
 	function getSettings(): array;
 
 	/**
-	 * @return string|NULL
+	 * @return string|null
 	 */
 	function getFolder(): ?string;
 

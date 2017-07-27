@@ -17,3 +17,12 @@ namespace AlesWita\DropzoneUploader;
 class DropzoneUploaderException extends \Exception
 {
 }
+
+
+/**
+ * @author Ales Wita
+ * @license MIT
+ */
+class TestException extends \Exception
+{
+}

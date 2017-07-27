@@ -15,7 +15,7 @@ use AlesWita;
 use Nette;
 use Tester;
 
-require_once __DIR__ . "/../bootstrap.php";
+require_once __DIR__ . '/../bootstrap.php';
 
 
 /**
@@ -30,22 +30,22 @@ final class GettersTest extends Tester\TestCase
 	public function testOne(): void {
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/gettersTestOne.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
+		$configurator->addConfig(__DIR__ . '/../app/config/gettersTestOne.neon');
 
 		$container = $configurator->createContainer();
 
 
 		// check service
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
 		Tester\Assert::true($service->getTranslator() instanceof Nette\Localization\ITranslator);
-		Tester\Assert::same(["main" => __DIR__ . "/../files/template.latte", "form" => __DIR__ . "/../files/template.latte", "files" => __DIR__ . "/../files/template.latte", "js" => __DIR__ . "/../files/template.latte"], $service->getDropzoneTemplate());
-		Tester\Assert::true(array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($service->getUploadDriver())));
-		Tester\Assert::same(1048576, $service->getSettings()["maxFilesize"]);
-		Tester\Assert::same(["foo"], $service->getSettings()["acceptedFiles"]);
-		Tester\Assert::same("foo", $service->getMessages()["dictDefaultMessage"]);
-		Tester\Assert::false(isset($service->getMessages()["dictRemoveFileConfirmation"]));
+		Tester\Assert::same(['main' => __DIR__ . '/../files/template.latte', 'form' => __DIR__ . '/../files/template.latte', 'files' => __DIR__ . '/../files/template.latte', 'js' => __DIR__ . '/../files/template.latte'], $service->getDropzoneTemplate());
+		Tester\Assert::true(array_key_exists('AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver', class_implements($service->getUploadDriver())));
+		Tester\Assert::same(1048576, $service->getSettings()['maxFilesize']);
+		Tester\Assert::same(['foo'], $service->getSettings()['acceptedFiles']);
+		Tester\Assert::same('foo', $service->getMessages()['dictDefaultMessage']);
+		Tester\Assert::false(isset($service->getMessages()['dictRemoveFileConfirmation']));
 
 
 		// check component
@@ -53,12 +53,12 @@ final class GettersTest extends Tester\TestCase
 
 		Tester\Assert::true($component instanceof AlesWita\DropzoneUploader\DropzoneUploader);
 		Tester\Assert::true($component->getTranslator() instanceof Nette\Localization\ITranslator);
-		Tester\Assert::same(["main" => __DIR__ . "/../files/template.latte", "form" => __DIR__ . "/../files/template.latte", "files" => __DIR__ . "/../files/template.latte", "js" => __DIR__ . "/../files/template.latte"], $component->getDropzoneTemplate());
-		Tester\Assert::true(array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($component->getUploadDriver())));
-		Tester\Assert::same(1, $component->getSettings()["maxFilesize"]);// different between component and factory
-		Tester\Assert::same("foo", $component->getSettings()["acceptedFiles"]);// different between component and factory
-		Tester\Assert::same("foo", $component->getMessages()["dictDefaultMessage"]);
-		Tester\Assert::false(isset($component->getMessages()["dictRemoveFileConfirmation"]));
+		Tester\Assert::same(['main' => __DIR__ . '/../files/template.latte', 'form' => __DIR__ . '/../files/template.latte', 'files' => __DIR__ . '/../files/template.latte', 'js' => __DIR__ . '/../files/template.latte'], $component->getDropzoneTemplate());
+		Tester\Assert::true(array_key_exists('AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver', class_implements($component->getUploadDriver())));
+		Tester\Assert::same(1, $component->getSettings()['maxFilesize']);// different between component and factory
+		Tester\Assert::same('foo', $component->getSettings()['acceptedFiles']);// different between component and factory
+		Tester\Assert::same('foo', $component->getMessages()['dictDefaultMessage']);
+		Tester\Assert::false(isset($component->getMessages()['dictRemoveFileConfirmation']));
 	}
 
 	/**
@@ -67,31 +67,31 @@ final class GettersTest extends Tester\TestCase
 	public function testTwo(): void {
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/gettersTestTwo.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
+		$configurator->addConfig(__DIR__ . '/../app/config/gettersTestTwo.neon');
 
 		$container = $configurator->createContainer();
 
 
 		// check factory
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
 		Tester\Assert::same(AlesWita\DropzoneUploader\Factory::BOOTSTRAP_V4_TEMPLATE, $service->getDropzoneTemplate());
-		Tester\Assert::same("foo", $service->getMessages()["dictRemoveFileConfirmation"]);
+		Tester\Assert::same('foo', $service->getMessages()['dictRemoveFileConfirmation']);
 
 
 		// check driver
 		$driver = $service->getUploadDriver();
 
-		Tester\Assert::true(array_key_exists("AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver", class_implements($driver)));
-		Tester\Assert::same(["url" => "foo"], $driver->getSettings());
-		Tester\Assert::same(NULL, $driver->getFolder());
+		Tester\Assert::true(array_key_exists('AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver', class_implements($driver)));
+		Tester\Assert::same(['url' => 'foo'], $driver->getSettings());
+		Tester\Assert::same(null, $driver->getFolder());
 
-		$driver->setSettings(["url" => "test"])
-			->setFolder("foo");
+		$driver->setSettings(['url' => 'test'])
+			->setFolder('foo');
 
-		Tester\Assert::same(["url" => "test"], $driver->getSettings());
-		Tester\Assert::same("foo", $driver->getFolder());
+		Tester\Assert::same(['url' => 'test'], $driver->getSettings());
+		Tester\Assert::same('foo', $driver->getFolder());
 	}
 }
 
