@@ -27,34 +27,38 @@ final class ExtensionTest extends Tester\TestCase
 	/**
 	 * @return void
 	 */
-	public function testOne(): void {
+	public function testOne(): void
+	{
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
-		$configurator->addConfig(__DIR__ . "/../app/config/extensionTestOne.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/extensionTestOne.neon');
 
 		$container = $configurator->createContainer();
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
-		Tester\Assert::same(100, $service->getSettings()["maxFilesize"]);
+		Tester\Assert::same(100, $service->getSettings()['maxFilesize']);
 	}
+
 
 	/**
 	 * @return void
 	 */
-	public function testTwo(): void {
+	public function testTwo(): void
+	{
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/extensionTestTwo.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
+		$configurator->addConfig(__DIR__ . '/../app/config/extensionTestTwo.neon');
 
 		$container = $configurator->createContainer();
 
 		$container = $configurator->createContainer();
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
-		Tester\Assert::same(102400, $service->getSettings()["maxFilesize"]);
+		Tester\Assert::same(102400, $service->getSettings()['maxFilesize']);
 	}
+
 
 	/**
 	 * @return void
@@ -62,49 +66,53 @@ final class ExtensionTest extends Tester\TestCase
 	public function testThree(): void {
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/extensionTestThree.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
+		$configurator->addConfig(__DIR__ . '/../app/config/extensionTestThree.neon');
 
 		$container = $configurator->createContainer();
 
 		$container = $configurator->createContainer();
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
-		Tester\Assert::same(104857600, $service->getSettings()["maxFilesize"]);
+		Tester\Assert::same(104857600, $service->getSettings()['maxFilesize']);
 	}
+
 
 	/**
 	 * @return void
 	 */
-	public function testFour(): void {
+	public function testFour(): void
+	{
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/extensionTestFour.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
+		$configurator->addConfig(__DIR__ . '/../app/config/extensionTestFour.neon');
 
 		$container = $configurator->createContainer();
 
 		$container = $configurator->createContainer();
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
-		Tester\Assert::same(1073741824, $service->getSettings()["maxFilesize"]);
+		Tester\Assert::same(1073741824, $service->getSettings()['maxFilesize']);
 	}
+
 
 	/**
 	 * @return void
 	 */
-	public function testFive(): void {
+	public function testFive(): void
+	{
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
-		$configurator->addConfig(__DIR__ . "/../app/config/config.neon");
-		$configurator->addConfig(__DIR__ . "/../app/config/extensionTestFive.neon");
+		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
+		$configurator->addConfig(__DIR__ . '/../app/config/extensionTestFive.neon');
 
 		$container = $configurator->createContainer();
 
 		$container = $configurator->createContainer();
-		$service = $container->getService("dropzoneuploader.dropzoneuploader");
+		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
-		Tester\Assert::same(109951162777.6, $service->getSettings()["maxFilesize"]);
+		Tester\Assert::same(109951162777.6, $service->getSettings()['maxFilesize']);
 	}
 }
 
