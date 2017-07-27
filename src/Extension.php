@@ -177,7 +177,7 @@ class Extension extends Nette\DI\CompilerExtension
 		$container = $this->getContainerBuilder();
 
 		$dropzoneUploader = $container->getDefinitionByType('AlesWita\\DropzoneUploader\\Factory');
-		$dropzoneUploader->addSetup('\$service->setTranslator(?)', ['@' . $container->getByType('Nette\\Localization\\ITranslator')]);
+		$dropzoneUploader->addSetup('$service->setTranslator(?)', ['@' . $container->getByType('Nette\\Localization\\ITranslator')]);
 	}
 
 

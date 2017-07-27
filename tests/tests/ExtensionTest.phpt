@@ -63,7 +63,8 @@ final class ExtensionTest extends Tester\TestCase
 	/**
 	 * @return void
 	 */
-	public function testThree(): void {
+	public function testThree(): void
+	{
 		$configurator = new Nette\Configurator();
 		$configurator->setTempDirectory(TEMP_DIR);
 		$configurator->addConfig(__DIR__ . '/../app/config/config.neon');
