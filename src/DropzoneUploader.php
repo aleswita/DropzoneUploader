@@ -83,7 +83,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 		if (isset($settings['maxFilesize'])) {
 			$settings['maxFilesize'] = $settings['maxFilesize'] / 1024 / 1024;
 		}
-		if (isset($settings['maxFilesize'])) {
+		if (isset($settings['acceptedFiles'])) {
 			$settings['acceptedFiles'] = implode(', ', $settings['acceptedFiles']);
 		}
 

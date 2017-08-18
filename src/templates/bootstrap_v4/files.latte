@@ -1,21 +1,21 @@
-<div id="previews">
- <div id="template" class="row alert">
+<div id="previews" class="container">
+	<div id="template" class="row">
 
-  {* file name *}
-  <div class="col-4 text-truncate"><a href="#" data-dz-name></a></div>
+		{* file name *}
+		<div class="order-1 col-9 col-lg-7 text-truncate"><a href="#" data-dz-name></a></div>
 
-  {* file size *}
-  <div class="col-1 text-right" data-dz-size></div>
+		{* file size *}
+		<div class="order-2 col-3 text-right col-lg-2 text-truncate" data-dz-size></div>
 
-  {* progress *}
-  <div class="col-2">
-   <div class="progress">
-    <div class="progress-bar" style="width: 0%" data-dz-uploadprogress></div>
-   </div>
-  </div>
+		{* file error *}
+		<div class="order-3 col-auto order-lg-4 col-lg-12 text-danger text-truncate" data-dz-errormessage></div>
 
-  {* file error *}
-  <div class="col-3 text-truncate" data-dz-errormessage></div>
+		{* progress *}
+		<div class="order-5 col-12 p-0">
+			<div class="progress">
+				<div class="progress-bar" style="width: 0%; height: 1px" data-dz-uploadprogress>&nbsp;</div>
+			</div>
+		</div>
 
- </div>
+	</div>
 </div>
