@@ -107,10 +107,12 @@ if (previewNode) {
 			{* addedfile *}
 			this.on("addedfile", function(file) {
 				var removeLink = file.previewElement.querySelector("[data-dz-remove]");
-				var col = Dropzone.createElement("<div class=\"order-4 order-lg-3 col-auto ml-auto text-truncate\"></div>");
+				var col = Dropzone.createElement("<div>");
 
 				removeLink.classList.add("text-danger");
+				col.classList = "order-4 order-lg-3 col-auto ml-auto text-truncate";
 				col.appendChild(removeLink);
+
 				file.previewElement.appendChild(col);
 			});
 
