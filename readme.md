@@ -8,7 +8,7 @@ Dropzone Uploader for [Nette Framework](https://nette.org) and [DropzoneJs](http
 The best way to install AlesWita/WebLoader is using [Composer](http://getcomposer.org/):
 ```sh
 # For PHP 7.1, Nette Framework 2.4/3.0 and DropzoneJs 5
-$ composer require aleswita/dropzoneuploader:~1.0
+$ composer require aleswita/dropzoneuploader:~1.3
 ```
 
 
@@ -30,7 +30,7 @@ dropzoneuploader:
 		acceptedFiles:
 			- application/vnd.ms-excel
 			- application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
-		addRemoveLinks: TRUE
+		addRemoveLinks: true
 	messages:
 		dictDefaultMessage: "Drag & drop files!"
 ```
