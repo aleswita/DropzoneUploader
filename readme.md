@@ -67,3 +67,13 @@ final class DropzonePresenter extends Nette\Application\UI\Presenter
 ```latte
 {control dropzoneForm}
 ```
+
+## Result
+#### Bootsrap V4 template
+Medium, large and extra large devices:
+
+![bootstrap-v4-md-lg-xl](https://raw.githubusercontent.com/aleswita/DropzoneUploader/master/examples/dropzone-bootstrap-v4-md-lg-xl.png)
+
+Small devices:
+
+![bootstrap-v4-sm](https://raw.githubusercontent.com/aleswita/DropzoneUploader/master/examples/dropzone-bootstrap-v4-sm.png)
