@@ -1,134 +1,133 @@
 {contentType javascript}
 if (window.Dropzone === undefined) {
-	console.error("Plugin 'dropzone.js' is missing!");
-	return;
-}
+	console.error('Plugin "dropzone.js" is missing!');
+} else {
+	var previewNode = document.querySelector('#template');
 
-var previewNode = document.querySelector("#template");
+	if (previewNode) {
+		previewNode.id = '';
+		var previewTemplate = previewNode.parentNode.innerHTML;
+		previewNode.parentNode.removeChild(previewNode);
+		Dropzone.options.dropzoneForm = {
+			{foreach $settings as $key => $val}
+				{$key}: {$val},
+			{/foreach}
 
-if (previewNode) {
-	previewNode.id = "";
-	var previewTemplate = previewNode.parentNode.innerHTML;
-	previewNode.parentNode.removeChild(previewNode);
-	Dropzone.options.dropzoneForm = {
-		{foreach $settings as $key => $val}
-			{$key}: {$val},
-		{/foreach}
+			{foreach $messages as $key => $val}
+				{$key}: {$val|translate},
+			{/foreach}
 
-		{foreach $messages as $key => $val}
-			{$key}: {$val|translate},
-		{/foreach}
+			'previewsContainer': '#previews',
+			'previewTemplate': previewTemplate,
 
-		"previewsContainer": "#previews",
-		"previewTemplate": previewTemplate,
+			init: function() {
+				var dropzone = this;
+				var folder = $('#dropzoneForm').find('input[name="folder"]').val();
+				$.getJSON({link uploadedFiles!}, {{$folderParam}: folder}, function (payload) {
+					if (payload.uploadedFiles) {
+						$.each(payload.uploadedFiles, function(i, file) {
+							dropzone.emit('addedfile', file);
+							dropzone.emit('success', file);
+							dropzone.emit('uploadprogress', file, 100);
+							dropzone.emit('complete', file);
+						});
+					}
+				});
 
-		init: function() {
-			var dropzone = this;
-			var folder = $("#dropzoneForm").find('input[name="folder"]').val();
-			$.getJSON({link uploadedFiles!}, {{$folderParam}: folder}, function (payload) {
-				if (payload.uploadedFiles) {
-					$.each(payload.uploadedFiles, function(i, file) {
-						dropzone.emit("addedfile", file);
-						dropzone.emit("success", file);
-						dropzone.emit("uploadprogress", file, 100);
-						dropzone.emit("complete", file);
-					});
-				}
-			});
+				{* drop *}
+				this.on('drop', function(e) {
+					this.element.classList.remove('border-primary');
+					this.element.classList.remove('text-primary');
+				});
 
-			{* drop *}
-			this.on("drop", function(e) {
-				this.element.classList.remove("border-primary");
-				this.element.classList.remove("text-primary");
-			});
+				{* dragenter *}
+				this.on('dragenter', function(e) {
+					this.element.classList.add('border-primary');
+					this.element.classList.add('text-primary');
+				});
 
-			{* dragenter *}
-			this.on("dragenter", function(e) {
-				this.element.classList.add("border-primary");
-				this.element.classList.add("text-primary");
-			});
+				{* dragover *}
+				this.on('dragover', function(e) {
+					this.element.classList.add('border-primary');
+					this.element.classList.add('text-primary');
+				});
 
-			{* dragover *}
-			this.on("dragover", function(e) {
-				this.element.classList.add("border-primary");
-				this.element.classList.add("text-primary");
-			});
+				{* dragleave *}
+				this.on('dragleave', function(e) {
+					this.element.classList.remove('border-primary');
+					this.element.classList.remove('text-primary');
+				});
 
-			{* dragleave *}
-			this.on("dragleave", function(e) {
-				this.element.classList.remove("border-primary");
-				this.element.classList.remove("text-primary");
-			});
+				{* reset *}
+				this.on('reset', function(e) {
+					this.element.classList.remove('border-primary');
+					this.element.classList.remove('text-primary');
+				});
 
-			{* reset *}
-			this.on("reset", function(e) {
-				this.element.classList.remove("border-primary");
-				this.element.classList.remove("text-primary");
-			});
+				{* error *}
+				this.on('error', function(file, errorMessage) {
+					file.previewElement.classList.add('table-danger');
 
-			{* error *}
-			this.on("error", function(file, errorMessage) {
-				file.previewElement.classList.add("table-danger");
+					var progressElement = file.previewElement.querySelector('[data-dz-uploadprogress]');
+					var a = file.previewElement.querySelector('[data-dz-name]');
 
-				var progressElement = file.previewElement.querySelector("[data-dz-uploadprogress]");
-				var a = file.previewElement.querySelector("[data-dz-name]");
+					progressElement.classList.add('bg-danger');
+					progressElement.style.width = '100%'';
+					a.classList = 'text-danger font-weight-bold';
+				});
 
-				progressElement.classList.add("bg-danger");
-				progressElement.style.width = "100%";
-				a.classList = "text-danger font-weight-bold";
-			});
+				{* success *}
+				this.on('success', function(file, response) {
+					file.previewElement.classList.add('table-success');
 
-			{* success *}
-			this.on("success", function(file, response) {
-				file.previewElement.classList.add("table-success");
+					var a = file.previewElement.querySelector('[data-dz-name]');
+					var link = {link download!};
+					var params = {
+						{$fileParam}: file.name,
+						{$folderParam}: folder,
+					};
 
-				var a = file.previewElement.querySelector("[data-dz-name]");
-				var link = {link download!};
-				var params = {
-					{$fileParam}: file.name,
-					{$folderParam}: folder,
-				};
+					a.href = link + '&' + $.param(params);
+					a.classList = 'text-success font-weight-bold';
+				});
 
-				a.href = link + "&" + $.param(params);
-				a.classList = "text-success font-weight-bold";
-			});
+				{* uploadprogress *}
+				this.on('uploadprogress', function(file, progress, bytesSent) {
+					var progressElement = file.previewElement.querySelector('[data-dz-uploadprogress]');
 
-			{* uploadprogress *}
-			this.on("uploadprogress", function(file, progress, bytesSent) {
-				var progressElement = file.previewElement.querySelector("[data-dz-uploadprogress]");
+					progressElement.style.width = progress + '%';
 
-				progressElement.style.width = progress + "%";
+					if (progress === 100) {
+						progressElement.classList.add('bg-success');
+					}
+				});
 
-				if (progress === 100) {
-					progressElement.classList.add("bg-success");
-				}
-			});
+				{* addedfile *}
+				this.on('addedfile', function(file) {
+					var removeLink = file.previewElement.querySelector('[data-dz-remove]');
+					var col = Dropzone.createElement('<div>');
 
-			{* addedfile *}
-			this.on("addedfile", function(file) {
-				var removeLink = file.previewElement.querySelector("[data-dz-remove]");
-				var col = Dropzone.createElement("<div>");
+					removeLink.classList.add('text-danger');
+					col.classList = 'order-4 order-lg-3 col-auto ml-auto text-truncate';
+					col.appendChild(removeLink);
 
-				removeLink.classList.add("text-danger");
-				col.classList = "order-4 order-lg-3 col-auto ml-auto text-truncate";
-				col.appendChild(removeLink);
+					file.previewElement.appendChild(col);
+				});
 
-				file.previewElement.appendChild(col);
-			});
-
-			{* removedfile *}
-			this.on("removedfile", function(file) {
-				if (file.accepted) {
-					$.ajax({
-						type: "GET",
-						url: {link remove!},
-						data: {
-							{$fileParam}: file.name,
-							{$folderParam}: folder,
-						},
-					});
-				}
-			});
-		},
-	};
+				{* removedfile *}
+				this.on('removedfile', function(file) {
+					if (file.accepted) {
+						$.ajax({
+							type: 'GET',
+							url: {link remove!},
+							data: {
+								{$fileParam}: file.name,
+								{$folderParam}: folder,
+							},
+						});
+					}
+				});
+			},
+		};
+	}
 }

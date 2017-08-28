@@ -1,46 +1,45 @@
 {contentType javascript}
 if (window.Dropzone === undefined) {
-	console.error("Plugin 'dropzone.js' is missing!");
-	return;
+	console.error('Plugin "dropzone.js" is missing!');
+} else {
+	Dropzone.options.dropzoneForm = {
+
+		{foreach $settings as $key => $val}
+			{$key}: {$val},
+		{/foreach}
+
+		{foreach $messages as $key => $val}
+			{$key}: {$val|translate},
+		{/foreach}
+
+		init: function() {
+			var dropzone = this;
+			var folder = $('#dropzoneForm').find('input[name="folder"]').val();
+
+			$.getJSON({link uploadedFiles!}, {{$folderParam}: folder}, function (payload) {
+				if (payload.uploadedFiles) {
+					$.each(payload.uploadedFiles, function(i, file) {
+						dropzone.emit('addedfile', file);
+						dropzone.emit('success', file);
+						dropzone.emit('uploadprogress', file, 100);
+						dropzone.emit('complete', file);
+					});
+				}
+			});
+
+			{* removedfile *}
+			this.on('removedfile', function(file) {
+				if (file.accepted) {
+					$.ajax({
+						type: 'GET',
+						url: {link remove!},
+						data: {
+							{$fileParam}: file.name,
+							{$folderParam}: folder,
+						},
+					});
+				}
+			});
+		},
+	};
 }
-
-Dropzone.options.dropzoneForm = {
-
-	{foreach $settings as $key => $val}
-		{$key}: {$val},
-	{/foreach}
-
-	{foreach $messages as $key => $val}
-		{$key}: {$val|translate},
-	{/foreach}
-
-	init: function() {
-		var dropzone = this;
-		var folder = $("#dropzoneForm").find('input[name="folder"]').val();
-
-		$.getJSON({link uploadedFiles!}, {{$folderParam}: folder}, function (payload) {
-			if (payload.uploadedFiles) {
-				$.each(payload.uploadedFiles, function(i, file) {
-					dropzone.emit("addedfile", file);
-					dropzone.emit("success", file);
-					dropzone.emit("uploadprogress", file, 100);
-					dropzone.emit("complete", file);
-				});
-			}
-		});
-
-		{* removedfile *}
-		this.on("removedfile", function(file) {
-			if (file.accepted) {
-				$.ajax({
-					type: "GET",
-					url: {link remove!},
-					data: {
-						{$fileParam}: file.name,
-						{$folderParam}: folder,
-					},
-				});
-			}
-		});
-	},
-};
