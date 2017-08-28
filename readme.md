@@ -5,7 +5,7 @@ Dropzone Uploader for [Nette Framework](https://nette.org) and [DropzoneJs](http
 [![Coverage Status](https://coveralls.io/repos/github/aleswita/DropzoneUploader/badge.svg?branch=master)](https://coveralls.io/github/aleswita/DropzoneUploader?branch=master)
 
 ## Installation
-The best way to install AlesWita/WebLoader is using [Composer](http://getcomposer.org/):
+The best way to install AlesWita/DropzoneUploader is using [Composer](http://getcomposer.org/):
 ```sh
 # For PHP 7.1, Nette Framework 2.4/3.0 and DropzoneJs 5
 $ composer require aleswita/dropzoneuploader
@@ -32,7 +32,7 @@ dropzoneuploader:
 			- application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 		addRemoveLinks: true
 	messages:
-		dictDefaultMessage: "Drag & drop files!"
+		dictDefaultMessage: 'Drag & drop files!'
 ```
 
 #### Presenter
@@ -55,7 +55,7 @@ final class DropzonePresenter extends Nette\Application\UI\Presenter
 		$uploader = $this->dropzoneFactory->getDropzoneUploader();
 
 		$uploader->onBeginning[] = function (AlesWita\DropzoneUploader\DropzoneUploader $uploader): void {
-			$uploader->setFolder("foo");
+			$uploader->setFolder('foo');
 		};
 
 		return $uploader;
