@@ -7,7 +7,6 @@ Dropzone Uploader for [Nette Framework](https://nette.org) and [DropzoneJs](http
 ## Installation
 The best way to install AlesWita/DropzoneUploader is using [Composer](http://getcomposer.org/):
 ```sh
-# For PHP 7.1, Nette Framework 2.4/3.0 and DropzoneJs 5
 $ composer require aleswita/dropzoneuploader
 ```
 
