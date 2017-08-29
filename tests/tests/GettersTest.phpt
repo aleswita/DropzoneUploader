@@ -97,7 +97,7 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::same('foo', $driver->getFolder());
 
         Tester\Assert::same([], $driver->getUploadedFiles());
-        Tester\Assert::false($driver->upload(new Nette\Http\FileUpload()));
+        Tester\Assert::false($driver->upload(new Nette\Http\FileUpload([])));
         Tester\Assert::true(is_callable($driver->download('foo')));
         Tester\Assert::false($driver->remove('foo'));
 	}
