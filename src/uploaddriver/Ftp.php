@@ -60,7 +60,7 @@ class Ftp extends UploadDriver
 					];
 				}
 			}
-		} catch(\FtpException $e) {
+		} catch (\FtpException $e) {
 		}
 
 		return $uploadedFiles;
