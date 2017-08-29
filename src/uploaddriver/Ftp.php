@@ -60,7 +60,7 @@ class Ftp extends UploadDriver
 					];
 				}
 			}
-		} catch (\FtpException $e) {
+		} catch(\FtpException $e) {
 		}
 
 		return $uploadedFiles;
@@ -102,7 +102,7 @@ class Ftp extends UploadDriver
 		return function ($httpRequest, $httpResponse) use ($file): void {
 			try {
 				$ftp = $this->getFtpConnection();
-				$fileName = ($this->folder === null ? $file : "{$this->folder}/{$file}");
+				$fileName = ($this->folder === null ? $file : $this->folder . '/' . $file);
 
 				$httpResponse->setContentType('application/octet-stream');
 				$httpResponse->setHeader('Content-Disposition', 'attachment; filename="' . $file . '"; filename*=utf-8\'\'' . rawurlencode($file));
