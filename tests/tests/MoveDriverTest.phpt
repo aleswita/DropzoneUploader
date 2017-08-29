@@ -36,7 +36,6 @@ final class MoveDriverTest extends Tester\TestCase
 
 		$container = $configurator->createContainer();
 		$presenterFactory = $container->getByType('Nette\\Application\\IPresenterFactory');
-
 		$file = new Nette\Http\FileUpload(['name' => 'template.latte', 'type' => '', 'size' => 10, 'tmp_name' => __DIR__ . '/../files/template.latte', 'error' => 0]);
 
 		$presenter = $presenterFactory->createPresenter('Base');
