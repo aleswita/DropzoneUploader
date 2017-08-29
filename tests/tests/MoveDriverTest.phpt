@@ -64,9 +64,9 @@ final class MoveDriverTest extends Tester\TestCase
 		Tester\Assert::true($form->isSuccess());
 		Tester\Assert::same($fileUpload, $form->getHttpData()['file']);
 
-									 var_dump($service->getUploadDriver()->getSettings()['dir'] . '/'. basename($file));
+									 var_dump(__DIR__ . '/' . $service->getUploadDriver()->getSettings()['dir'] . '/'. basename($file));
 		// check file
-		Tester\Assert::true(is_file($service->getUploadDriver()->getSettings()['dir'] . '/'. basename($file)));
+		Tester\Assert::true(is_file(__DIR__ . '/' . $service->getUploadDriver()->getSettings()['dir'] . '/'. basename($file)));
 	}
 
 
