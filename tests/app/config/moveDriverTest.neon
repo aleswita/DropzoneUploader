@@ -4,4 +4,4 @@ dropzoneuploader:
 		settings:
 			dir: /upload/
 	settings:
-		addRemoveLinks: TRUE
+		addRemoveLinks: true

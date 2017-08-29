@@ -17,7 +17,7 @@ use Nette;
  * @author Ales Wita
  * @license MIT
  */
-final class Ftp extends UploadDriver
+class Ftp extends UploadDriver
 {
 	/** @var array */
 	protected $settings = [
