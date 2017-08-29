@@ -90,10 +90,10 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::same(['url' => 'foo'], $driver->getSettings());
 		Tester\Assert::same(null, $driver->getFolder());
 
-		$driver->setSettings(['url' => 'test'])
+		$driver->setSettings(['url' => 'ftp://user:password@127.0.0.1'])
 			->setFolder('foo');
 
-		Tester\Assert::same(['url' => 'test'], $driver->getSettings());
+		Tester\Assert::same(['url' => 'ftp://user:password@127.0.0.1'], $driver->getSettings());
 		Tester\Assert::same('foo', $driver->getFolder());
 
         Tester\Assert::same([], $driver->getUploadedFiles());
