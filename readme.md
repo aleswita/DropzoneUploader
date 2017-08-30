@@ -12,4 +12,4 @@ $ composer require aleswita/dropzoneuploader
 
 
 ## Documentation
-See [Wiki](https://github.com/aleswita/DropzoneUploader/wiki).
+Documentation you can find in [Wiki](https://github.com/aleswita/DropzoneUploader/wiki).
