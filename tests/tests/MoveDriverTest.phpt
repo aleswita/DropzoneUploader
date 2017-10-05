@@ -36,15 +36,12 @@ final class MoveDriverTest extends Tester\TestCase
 
 		$container = $configurator->createContainer();
 		$presenterFactory = $container->getByType('Nette\\Application\\IPresenterFactory');
-
-		$file = Tester\FileMock::create('');
-		$fileUpload = new Nette\Http\FileUpload(['name' => basename($file), 'type' => '', 'size' => 10, 'tmp_name' => $file, 'error' => 0]);
-		//$file = new Nette\Http\FileUpload(['name' => 'template.latte', 'type' => '', 'size' => 10, 'tmp_name' => __DIR__ . '/../files/template.latte', 'error' => 0]);
+-		$file = new Nette\Http\FileUpload(['name' => 'template.latte', 'type' => '', 'size' => 10, 'tmp_name' => __DIR__ . '/../files/template.latte', 'error' => 0]);
 
 		$presenter = $presenterFactory->createPresenter('Base');
 		$presenter->getTemplate()->setTranslator(new AlesWita\DropzoneUploader\Tests\App\Service\FakeTranslator);
 		$presenter->autoCanonicalize = false;
-		$request = new Nette\Application\Request('Base', 'POST', ['action' => 'one'], ['_do' => 'dropzoneUploader-form-submit'], ['file' => $fileUpload]);
+		$request = new Nette\Application\Request('Base', 'POST', ['action' => 'one'], ['_do' => 'dropzoneUploader-form-submit'], ['file' => $file]);
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
@@ -62,11 +59,11 @@ final class MoveDriverTest extends Tester\TestCase
 
 		Tester\Assert::count(0, $form->getErrors());
 		Tester\Assert::true($form->isSuccess());
-		Tester\Assert::same($fileUpload, $form->getHttpData()['file']);
+		Tester\Assert::same($file, $form->getHttpData()['file']);
 
-									 var_dump(__DIR__ . '/' . $service->getUploadDriver()->getSettings()['dir'] . '/'. basename($file));
+
 		// check file
-		Tester\Assert::true(is_file(__DIR__ . '/' . $service->getUploadDriver()->getSettings()['dir'] . '/'. basename($file)));
+-		Tester\Assert::true(is_file($service->getUploadDriver()->getSettings()['dir'] . '/template.latte'));
 	}
 
 
