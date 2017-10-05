@@ -1,7 +1,0 @@
-dropzoneuploader:
-	uploadDriver:
-		driver: AlesWita\DropzoneUploader\UploadDriver\Move
-		settings:
-			dir: /upload/
-	settings:
-		addRemoveLinks: TRUE
