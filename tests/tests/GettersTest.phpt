@@ -90,16 +90,11 @@ final class GettersTest extends Tester\TestCase
 		Tester\Assert::same(['url' => 'foo'], $driver->getSettings());
 		Tester\Assert::same(null, $driver->getFolder());
 
-		$driver->setSettings(['url' => 'ftp://user:password@127.0.0.1'])
+		$driver->setSettings(['url' => 'test'])
 			->setFolder('foo');
 
-		Tester\Assert::same(['url' => 'ftp://user:password@127.0.0.1'], $driver->getSettings());
+		Tester\Assert::same(['url' => 'test'], $driver->getSettings());
 		Tester\Assert::same('foo', $driver->getFolder());
-
-		Tester\Assert::same([], $driver->getUploadedFiles());
-		Tester\Assert::false($driver->upload(new Nette\Http\FileUpload([])));
-		Tester\Assert::true(is_callable($driver->download('foo')));
-		Tester\Assert::false($driver->remove('foo'));
 	}
 }
 

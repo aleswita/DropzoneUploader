@@ -22,6 +22,15 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	/** @var callable[] */
 	public $onBeginning;
 
+	/** @var callable[] */
+	public $onUpload;
+
+	/** @var callable[] */
+	public $onDownload;
+
+	/** @var callable[] */
+	public $onRemove;
+
 	/** @var Nette\Localization\ITranslator */
 	private $translator;
 
@@ -171,32 +180,10 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	/**
 	 * @return void
 	 */
-	private function prepareTemplate(): void
-	{
-		if ($this->onBeginning !== null) {
-			if (!is_array($this->onBeginning) && !($this->onBeginning instanceof \Traversable)) {
-				throw new AlesWita\DropzoneUploader\DropzoneUploaderException('Property DropzoneUploader::$onBeginning must be array or Traversable, ' . gettype($this->onBeginning) . ' given.');
-			}
-			foreach ($this->onBeginning as $callback) {
-				Nette\Utils\Callback::invoke($callback, $this);
-			}
-		}
-
-		$this->template->fileParam = $this->getParameterId('file');
-		$this->template->folderParam = $this->getParameterId('folder');
-		$this->template->settings = $this->settings;
-		$this->template->messages = $this->messages;
-
-		$this->template->setTranslator($this->translator);
-	}
-
-
-	/**
-	 * @return void
-	 */
 	public function render(): void
 	{
 		$this->prepareTemplate();
+		$this->callEvent($this->onBeginning);
 		$this->template->setFile($this->dropzoneTemplate['main']);
 		$this->template->render();
 	}
@@ -208,6 +195,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	public function renderForm(): void
 	{
 		$this->prepareTemplate();
+		$this->callEvent($this->onBeginning);
 		$this->template->setFile($this->dropzoneTemplate['form']);
 		$this->template->render();
 	}
@@ -236,6 +224,34 @@ class DropzoneUploader extends Nette\Application\UI\Control
 
 
 	/**
+	 * @return void
+	 */
+	private function prepareTemplate(): void
+	{
+		$this->template->fileParam = $this->getParameterId('file');
+		$this->template->folderParam = $this->getParameterId('folder');
+		$this->template->settings = $this->settings;
+		$this->template->messages = $this->messages;
+
+		$this->template->setTranslator($this->translator);
+	}
+
+
+	/**
+	 * @param array
+	 * @return void
+	 */
+	private function callEvent(array $event = null): void
+	{
+		if ($event !== null) {
+			foreach ($event as $callback) {
+				Nette\Utils\Callback::invoke($callback, $this);
+			}
+		}
+	}
+
+
+	/**
 	 * @return Nette\Application\UI\Form
 	 */
 	protected function createComponentForm(): Nette\Application\UI\Form
@@ -250,6 +266,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 		$form->onSuccess[] = function (Nette\Application\UI\Form $form, array $values): void {
 			$httpData = $form->getHttpData();
 
+			$this->callEvent($this->onUpload);
 			$this->uploadDriver->setFolder($values['folder'])
 				->upload($httpData['file']);
 		};
@@ -268,6 +285,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 		$this->uploadDriver->setFolder($folder);
 
 		if ($file !== null) {
+			$this->callEvent($this->onDownload);
 			$this->presenter->sendResponse(new Nette\Application\Responses\CallbackResponse($this->uploadDriver->download($file)));
 		}
 	}
@@ -284,6 +302,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 			$this->uploadDriver->setFolder($folder);
 
 			if ($file !== null) {
+				$this->callEvent($this->onRemove);
 				$this->uploadDriver->remove($file);
 			}
 		}

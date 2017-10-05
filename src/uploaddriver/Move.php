@@ -17,7 +17,7 @@ use Nette;
  * @author Ales Wita
  * @license MIT
  */
-class Move extends UploadDriver
+final class Move extends UploadDriver
 {
 	/** @var array */
 	protected $settings = [
@@ -88,7 +88,7 @@ class Move extends UploadDriver
 	public function download(string $file): callable
 	{
 		return function ($httpRequest, $httpResponse) use ($file): void {
-			$fileResponse = new Nette\Application\Responses\FileResponse(($this->folder === null ? $file : $this->folder . '/' . $file));
+			$fileResponse = new Nette\Application\Responses\FileResponse(($this->folder === null ? $this->settings['dir'] . '/' . $file : $this->settings['dir'] . '/' . $this->folder . '/' . $file));
 			$fileResponse->send($httpRequest, $httpResponse);
 		};
 	}
@@ -101,8 +101,12 @@ class Move extends UploadDriver
 	public function remove(string $file): bool
 	{
 		try {
-			$path = ($this->folder === null ? $this->settings['dir'] . '/' . $file : $this->settings['dir'] . '/' . $this->folder . '/' . $file);
+			$path = $this->folder === null ? $this->settings['dir'] . '/' . $file : $this->settings['dir'] . '/' . $this->folder . '/' . $file;
 			Nette\Utils\FileSystem::delete($path);
+
+			if (count(scandir(dirname($path))) === 2) {// 2, because '.' and '..'
+				Nette\Utils\FileSystem::delete(dirname($path));// remove empty folder
+			}
 			return true;
 		} catch (Nette\IOException $e) {
 		}
