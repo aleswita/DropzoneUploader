@@ -63,7 +63,7 @@ final class MoveDriverTest extends Tester\TestCase
 
 
 		// check file
--Tester\Assert::true(is_file($service->getUploadDriver()->getSettings()['dir'] . '/template.latte'));
+		Tester\Assert::true(is_file($service->getUploadDriver()->getSettings()['dir'] . '/template.latte'));
 	}
 
 
