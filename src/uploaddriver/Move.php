@@ -17,7 +17,7 @@ use Nette;
  * @author Ales Wita
  * @license MIT
  */
-final class Move extends UploadDriver
+class Move extends UploadDriver
 {
 	/** @var array */
 	protected $settings = [
