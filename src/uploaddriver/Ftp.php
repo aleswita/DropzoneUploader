@@ -17,7 +17,7 @@ use Nette;
  * @author Ales Wita
  * @license MIT
  */
-final class Ftp extends UploadDriver
+class Ftp extends UploadDriver
 {
 	/** @var array */
 	protected $settings = [
@@ -102,7 +102,7 @@ final class Ftp extends UploadDriver
 		return function ($httpRequest, $httpResponse) use ($file): void {
 			try {
 				$ftp = $this->getFtpConnection();
-				$fileName = ($this->folder === null ? $file : "{$this->folder}/{$file}");
+				$fileName = ($this->folder === null ? $file : $this->folder . '/' . $file);
 
 				$httpResponse->setContentType('application/octet-stream');
 				$httpResponse->setHeader('Content-Disposition', 'attachment; filename="' . $file . '"; filename*=utf-8\'\'' . rawurlencode($file));
