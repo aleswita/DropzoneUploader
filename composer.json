@@ -17,6 +17,7 @@
 		"nette/http": "~2.4.0 || ~3.0.0",
 		"nette/utils": "~2.4.0 || ~3.0.0",
 		"latte/latte": "~2.4.0 || ~3.0.0",
+		"friendsofphp/php-cs-fixer": "2.7 as 2.6",
 		"dg/ftp-php": "~1.2"
 	},
 	"require-dev": {
