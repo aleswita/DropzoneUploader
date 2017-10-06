@@ -266,7 +266,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 		$form->onSuccess[] = function (Nette\Application\UI\Form $form, array $values): void {
 			$httpData = $form->getHttpData();
 			$this->uploadDriver->setFolder($values['folder']);
-				
+
 			if ($this->uploadDriver->upload($httpData['file'])) {
 				$this->callEvent($this->onUpload, [$this, $httpData['file']]);
 			}
@@ -300,7 +300,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	{
 		if ($this->settings['addRemoveLinks'] && $file !== null) {
 			$this->uploadDriver->setFolder($folder);
-			
+
 			if ($this->uploadDriver->remove($file)) {
 				$this->callEvent($this->onRemove, [$this, $file]);
 			}
