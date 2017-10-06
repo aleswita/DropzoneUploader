@@ -102,10 +102,11 @@ class Move extends UploadDriver
 	{
 		try {
 			$path = $this->folder === null ? $this->settings['dir'] . '/' . $file : $this->settings['dir'] . '/' . $this->folder . '/' . $file;
+			$dir = dirname($path);
 			Nette\Utils\FileSystem::delete($path);
 
-			if (count(scandir(dirname($path))) === 2) {// 2, because '.' and '..'
-				Nette\Utils\FileSystem::delete(dirname($path));// remove empty folder
+			if (is_dir($dir) && count(scandir($dir)) === 2) {// 2, because '.' and '..'
+				Nette\Utils\FileSystem::delete($dir);// remove empty folder
 			}
 			return true;
 		} catch (Nette\IOException $e) {
