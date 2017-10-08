@@ -25,7 +25,7 @@ jobs:
             php: 7.1
             install:
                 - travis_retry composer create-project nette/code-checker temp/code-checker --no-interaction --no-progress
-                - travis_retry composer create-project nette/coding-standard temp/coding-standard --no-interaction --no-progress
+                - travis_retry composer create-project nette/coding-standard temp/coding-standard dev-master --no-interaction --no-progress
 
             script:
                 - php temp/code-checker/src/code-checker.php --short-arrays --strict-types
