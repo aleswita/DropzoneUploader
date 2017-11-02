@@ -16,13 +16,13 @@
 		"nette/forms": "~2.4.0 || ~3.0.0",
 		"nette/http": "~2.4.0 || ~3.0.0",
 		"nette/utils": "~2.4.0 || ~3.0.0",
-		"latte/latte": "~2.4.0 || ~3.0.0",
 		"dg/ftp-php": "~1.2"
 	},
 	"require-dev": {
 		"nette/di": "~2.4.6 || ~3.0.0",
 		"nette/robot-loader": "~2.4.0 || ~3.0.0",
 		"nette/bootstrap": "~2.4.0 || ~3.0.0",
+		"latte/latte": "~2.4.0 || ~3.0.0",
 		"tracy/tracy": "~2.4.0 || ~3.0.0",
 		"nette/tester": "~2.0.0"
 	},
