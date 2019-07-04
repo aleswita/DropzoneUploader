@@ -245,9 +245,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	{
 		if ($event !== null) {
 			foreach ($event as $callback) {
-				// deprecated
-				//Nette\Utils\Callback::invokeArgs($callback, $args);
-				$callback($args);
+				$callback(...$args);
 			}
 		}
 	}
