@@ -48,6 +48,7 @@ jobs:
     allow_failures:
         - stage: Code Standard Checker
         - stage: Code Coverage
+        - php: 8.0snapshot
 
 sudo: false
 dist: xenial
