@@ -1,2 +1,4 @@
 dropzoneuploader:
 	dropzoneTemplate: [template]
+	uploadDriver:
+	    driver: AlesWita\DropzoneUploader\UploadDriver\Move

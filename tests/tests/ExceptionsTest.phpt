@@ -100,7 +100,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver must be set!
+	 * @throws Nette\DI\InvalidConfigurationException The mandatory item 'dropzoneuploader › uploadDriver › driver' is missing.
 	 * @return void
 	 */
 	public function testSix(): void
@@ -145,7 +145,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload driver setting must be array!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › uploadDriver › settings' expects to be array, 'foo' given.
 	 * @return void
 	 */
 	public function testNine(): void
@@ -175,7 +175,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Maximum file size setting must be integer, float or string!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › maxFilesize' expects to be string|int|float|null, array given.
 	 * @return void
 	 */
 	public function testEleven(): void
@@ -205,7 +205,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Accepted files setting must be string or array type!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › acceptedFiles' expects to be array, 1 given.
 	 * @return void
 	 */
 	public function testThirteen(): void
@@ -220,7 +220,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Method setting must be "POST" or "GET"!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › method' expects to be 'POST'|'post'|'GET'|'get', 'foo' given.
 	 * @return void
 	 */
 	public function testFourteen(): void
@@ -235,7 +235,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Parallel uploads setting must be numeric!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › parallelUploads' expects to be int, 'foo' given.
 	 * @return void
 	 */
 	public function testFifteen(): void
@@ -250,7 +250,8 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Upload multiple setting must be boolean!
+
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › uploadMultiple' expects to be bool, 'foo' given.
 	 * @return void
 	 */
 	public function testSixteen(): void
@@ -265,7 +266,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Param name setting must be string!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › paramName' expects to be string, array given.
 	 * @return void
 	 */
 	public function testSeventeen(): void
@@ -280,7 +281,7 @@ final class ExceptionsTest extends Tester\TestCase
 
 
 	/**
-	 * @throws AlesWita\DropzoneUploader\DropzoneUploaderException Add remove links setting must be boolean!
+	 * @throws Nette\DI\InvalidConfigurationException The item 'dropzoneuploader › settings › addRemoveLinks' expects to be bool, 'foo' given.
 	 * @return void
 	 */
 	public function testEighteen(): void
