@@ -40,7 +40,7 @@ final class GettersTest extends Tester\TestCase
 		// check service
 		$service = $container->getService('dropzoneuploader.dropzoneuploader');
 
-		Tester\Assert::true($service->getTranslator() instanceof Nette\Localization\ITranslator);
+		Tester\Assert::true($service->getTranslator() instanceof Nette\Localization\Translator);
 		Tester\Assert::same(['main' => __DIR__ . '/../files/template.latte', 'form' => __DIR__ . '/../files/template.latte', 'files' => __DIR__ . '/../files/template.latte', 'js' => __DIR__ . '/../files/template.latte'], $service->getDropzoneTemplate());
 		Tester\Assert::true(array_key_exists('AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver', class_implements($service->getUploadDriver())));
 		Tester\Assert::same(1048576, $service->getSettings()['maxFilesize']);
@@ -53,7 +53,7 @@ final class GettersTest extends Tester\TestCase
 		$component = $service->getDropzoneUploader();
 
 		Tester\Assert::true($component instanceof AlesWita\DropzoneUploader\DropzoneUploader);
-		Tester\Assert::true($component->getTranslator() instanceof Nette\Localization\ITranslator);
+		Tester\Assert::true($component->getTranslator() instanceof Nette\Localization\Translator);
 		Tester\Assert::same(['main' => __DIR__ . '/../files/template.latte', 'form' => __DIR__ . '/../files/template.latte', 'files' => __DIR__ . '/../files/template.latte', 'js' => __DIR__ . '/../files/template.latte'], $component->getDropzoneTemplate());
 		Tester\Assert::true(array_key_exists('AlesWita\\DropzoneUploader\\UploadDriver\\IUploadDriver', class_implements($component->getUploadDriver())));
 		Tester\Assert::same(1, $component->getSettings()['maxFilesize']);// different between component and factory
