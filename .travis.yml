@@ -1,13 +1,15 @@
 language: php
-
+os: linux
+dist: xenial
 php:
     - 7.2
     - 7.3
     - 7.4
     - 8.0snapshot
 env:
-    - PHP_BIN=php
-    - PHP_BIN=php-cgi
+  - PHP_BIN=php
+  - PHP_BIN=php-cgi
+
 
 install:
     - travis_retry composer install --no-interaction --no-progress
@@ -21,13 +23,13 @@ after_failure:
 
 jobs:
     include:
-        - name: Lowest Dependencies
+        -   name: Lowest Dependencies
             env: PHP_BIN=php
             install:
-                - travis_retry composer update --no-progress --prefer-dist --prefer-lowest --prefer-stable
+                    - travis_retry composer update --no-interaction --no-progress --prefer-lowest --prefer-stable
 
-        - stage: Code Standard Checker
-            php: 7.4
+        -   stage: Code Standard Checker
+            php: 7.2
             install:
                 - travis_retry composer create-project nette/code-checker temp/code-checker --no-interaction --no-progress
                 - travis_retry composer create-project nette/coding-standard temp/coding-standard --no-interaction --no-progress
@@ -36,8 +38,8 @@ jobs:
                 - php temp/code-checker/src/code-checker.php --short-arrays --strict-types
                 - php temp/coding-standard/ecs check src tests --config temp/coding-standard/coding-standard-php71.neon
 
-        - stage: Code Coverage
-            php: 7.4
+        -   stage: Code Coverage
+            php: 7.2
             script:
                 - vendor/bin/tester -p phpdbg tests -s --coverage ./coverage.xml --coverage-src ./src
 
@@ -50,8 +52,7 @@ jobs:
         - stage: Code Coverage
         - php: 8.0snapshot
 
-sudo: false
-dist: xenial
+
 cache:
     directories:
         - $HOME/.composer/cache
