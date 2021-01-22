@@ -16,14 +16,16 @@ use Nette;
  * @author Ales Wita
  * @license MIT
  */
-final class FakeTranslator implements Nette\Localization\ITranslator
+final class FakeTranslator implements Nette\Localization\Translator
 {
+
 	/**
-	 * @param string
-	 * @param int
+	 * @param mixed $message
+	 * @param mixed ...$parameters
+	 *
 	 * @return string
 	 */
-	public function translate($message, $count = null): string
+	public function translate($message, ...$parameters): string
 	{
 		return $message;
 	}
