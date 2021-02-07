@@ -4,3 +4,5 @@ dropzoneuploader:
 		form: form.latte
 		files: %appDir%/../files/template.latte
 		js: %appDir%/../files/template.latte
+	uploadDriver:
+	    driver: AlesWita\DropzoneUploader\UploadDriver\Move

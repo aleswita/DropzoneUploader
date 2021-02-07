@@ -8,6 +8,7 @@ dropzoneuploader:
 		driver: AlesWita\DropzoneUploader\UploadDriver\Move
 	settings:
 		maxFilesize: 1MB
-		acceptedFiles: foo
+		acceptedFiles:
+		    - foo
 	messages:
 		dictDefaultMessage: foo

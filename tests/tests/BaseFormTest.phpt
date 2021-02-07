@@ -44,7 +44,7 @@ final class BaseFormTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\Template);
 
 		$source = (string) $response->getSource();
 		$dom = Tester\DomQuery::fromHtml($source);
@@ -102,7 +102,7 @@ final class BaseFormTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\Template);
 
 		$source = (string) $response->getSource();
 		$dom = Tester\DomQuery::fromHtml($source);
@@ -160,7 +160,7 @@ final class BaseFormTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\Template);
 
 		$source = (string) $response->getSource();
 		$dom = Tester\DomQuery::fromHtml($source);
@@ -218,7 +218,7 @@ final class BaseFormTest extends Tester\TestCase
 		$response = $presenter->run($request);
 
 		Tester\Assert::true($response instanceof Nette\Application\Responses\TextResponse);
-		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\ITemplate);
+		Tester\Assert::true($response->getSource() instanceof Nette\Application\UI\Template);
 
 		$source = (string) $response->getSource();
 		$dom = Tester\DomQuery::fromHtml($source);

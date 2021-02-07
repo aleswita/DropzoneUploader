@@ -31,7 +31,7 @@ class DropzoneUploader extends Nette\Application\UI\Control
 	/** @var callable[] */
 	public $onRemove;
 
-	/** @var Nette\Localization\ITranslator */
+	/** @var Nette\Localization\Translator */
 	private $translator;
 
 	/** @var array */
@@ -51,10 +51,10 @@ class DropzoneUploader extends Nette\Application\UI\Control
 
 
 	/**
-	 * @param Nette\Localization\ITranslator
+	 * @param Nette\Localization\Translator
 	 * @return self
 	 */
-	public function setTranslator(Nette\Localization\ITranslator $translator): self
+	public function setTranslator(Nette\Localization\Translator $translator): self
 	{
 		$this->translator = $translator;
 		return $this;
@@ -124,9 +124,9 @@ class DropzoneUploader extends Nette\Application\UI\Control
 
 
 	/**
-	 * @return Nette\Localization\ITranslator
+	 * @return Nette\Localization\Translator
 	 */
-	public function getTranslator(): Nette\Localization\ITranslator
+	public function getTranslator(): Nette\Localization\Translator
 	{
 		return $this->translator;
 	}
